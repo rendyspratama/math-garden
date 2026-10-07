@@ -491,6 +491,111 @@
   .look-level{text-align:center;font-size:15px;color:var(--muted);margin-top:10px}
   .look-level b{color:var(--ac)}
 
+  /* ---------- Make 10 v2 ---------- */
+  .ten-card{padding:12px 10px}
+  .ten-goal{text-align:center;font-size:clamp(18px,4.5vw,22px);font-weight:600;margin-bottom:8px}
+  .ten-goal b{color:var(--ac)}
+  .tbox{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:10px;border-radius:20px;margin:0 auto;max-width:330px;transition:opacity .3s}
+  .tcell{position:relative;aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .tcell .obj{--osz:clamp(24px,6vw,32px);cursor:default}
+  .tcell.empty{cursor:pointer}
+  .tcell.empty.glow{animation:slotPulse2 1.2s ease-in-out infinite}
+  @keyframes slotPulse2{0%,100%{box-shadow:0 0 0 0 rgba(242,201,92,0)}50%{box-shadow:0 0 0 5px rgba(242,201,92,.7)}}
+  .ghost{position:absolute;opacity:.16;filter:grayscale(.6);pointer-events:none}
+  /* egg box */
+  .tbox.egg{background:#E6CFA8;border:3px solid #CDAF80;box-shadow:inset 0 -6px 0 rgba(0,0,0,.06)}
+  .tbox.egg .tcell{background:radial-gradient(circle at 50% 40%,#D9BC8C 0,#CFAE7C 60%,#C6A26E 100%);box-shadow:inset 0 4px 6px rgba(0,0,0,.18)}
+  .eg{display:block;width:62%;height:78%;border-radius:50% 50% 46% 46%/58% 58% 42% 42%;position:relative}
+  .eg::after{content:'';position:absolute;left:22%;top:16%;width:22%;height:18%;border-radius:50%;background:rgba(255,255,255,.55)}
+  .eg.have{background:#FBF4E6;box-shadow:inset -3px -4px 0 rgba(0,0,0,.07),0 2px 0 rgba(0,0,0,.08)}
+  .eg.add{background:#C8895A;box-shadow:inset -3px -4px 0 rgba(0,0,0,.12),0 2px 0 rgba(0,0,0,.1)}
+  .eg.ghosted{background:transparent;border:2px dashed #9C7B4E;box-shadow:none}
+  .eg.ghosted::after{display:none}
+  .obj.egg{width:100%;height:100%}
+  /* bus */
+  .tbox.bus{background:#F6D57A;border:4px solid #D9AF3D;border-radius:26px 26px 18px 18px;padding:14px 10px 18px}
+  .tbox.bus::after{content:'';position:absolute;left:18%;right:18%;bottom:-14px;height:14px;background:radial-gradient(circle at 12% 50%,#5D5866 0 9px,transparent 10px),radial-gradient(circle at 88% 50%,#5D5866 0 9px,transparent 10px)}
+  .tbox.bus .tcell{border-radius:12px;background:#E9EEF5;box-shadow:inset 0 -5px 0 #C9D3E1}
+  /* car park */
+  .tbox.park{background:#B9BEC8;border:3px solid #9CA2AE}
+  .tbox.park .tcell{border-radius:6px;background:#A9AFBA;border:2px dashed #F3F4F6}
+  /* dots */
+  .tbox.dots{background:#F5EDDB;border:3px solid #E7D9BE}
+  .tbox.dots .tcell{border-radius:12px;background:#FFFDF8}
+  .tbox.numbers{display:none}
+  /* the two parts keep their colours everywhere: have = orange, more = blue (matches the bond) */
+  .tcell.th{outline:4px solid #F2A57E;outline-offset:-4px}
+  .tcell.ta{outline:4px solid #7DB5DD;outline-offset:-4px}
+  .tcell.empty.glow{outline:3px dashed #7DB5DD;outline-offset:-4px}
+  .tcell .counted{background:transparent!important}
+  .tcell.th .badge{background:#DE8A62} .tcell.ta .badge{background:#5E9ECB}
+  .ten-legend{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .tl{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:clamp(15px,3.8vw,18px);font-weight:600;border:3px solid;background:#fff;transition:opacity .3s}
+  .tl b{font-size:1.25em}
+  .tl.lh{border-color:#F2A57E;background:#FDE7D9;color:#B8582F}
+  .tl.la{border-color:#7DB5DD;background:#DEEEF8;color:#2F6E9B}
+  .tl.tl-wait{opacity:.45;border-style:dashed}
+  /* bus: windscreen at the front, a door, big wheels */
+  .tbox.bus{background:linear-gradient(#F8DB86,#F2CC62);border:4px solid #D9AF3D;border-radius:22px 52px 16px 16px;padding:14px 50px 26px 12px;margin-bottom:14px}
+  .tbox.bus::before{content:'';position:absolute;right:10px;top:14px;width:30px;height:52%;background:linear-gradient(160deg,#D8F0FB,#A9D7EE);border:3px solid #D9AF3D;border-radius:8px 22px 8px 8px}
+  .tbox.bus::after{content:'';position:absolute;left:0;right:0;bottom:-17px;height:32px;
+    background:radial-gradient(circle at 20% 50%,#7A7486 0 5px,#4F4A5A 6px 14px,transparent 15px),radial-gradient(circle at 80% 50%,#7A7486 0 5px,#4F4A5A 6px 14px,transparent 15px)}
+  .tbox.bus .tcell{border-radius:12px 12px 8px 8px}
+  .bus-lamp{position:absolute;right:8px;bottom:12px;width:12px;height:12px;border-radius:50%;background:#FFF3B0;box-shadow:0 0 6px #FFE36B}
+  .bus-sign{position:absolute;left:50%;top:-14px;transform:translateX(-50%);background:#fff;border:3px solid #D9AF3D;border-radius:10px;padding:0 10px;font-size:14px;font-weight:700;color:#8C6A12;white-space:nowrap}
+  /* car park: a road at the front */
+  .tbox.park{padding:12px 10px 26px}
+  .tbox.park::after{content:'';position:absolute;left:10px;right:10px;bottom:8px;height:6px;background:repeating-linear-gradient(90deg,#F3F4F6 0 18px,transparent 18px 34px);border-radius:3px}
+  /* egg box: a lid at the back */
+  .tbox.egg{margin-top:18px}
+  .tbox.egg::before{content:'';position:absolute;left:6px;right:6px;top:-18px;height:18px;background:#D9BC8C;border:3px solid #CDAF80;border-bottom:none;border-radius:14px 14px 0 0}
+
+  /* live bond (whole known) */
+  .tbond{position:relative;width:200px;height:118px;margin:10px auto 0}
+  .tbond svg{position:absolute;inset:0;width:100%;height:100%}
+  .tbond line{stroke:#C9C0AE;stroke-width:4;stroke-linecap:round}
+  .tbc{position:absolute;width:52px;height:52px;border-radius:50%;border:4px solid;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:24px;font-weight:700;line-height:1;background:#fff}
+  .tbc small{font-size:9px;font-weight:600;color:var(--muted);margin-top:1px}
+  .tbc.w{left:74px;top:0;border-color:#D4A23A;background:#FCF2D3}
+  .tbc.p1{left:0;bottom:0;border-color:#DE8A62;background:#FDE7D9}
+  .tbc.p2{right:0;bottom:0;border-color:#5E9ECB;background:#DEEEF8}
+  .tbc.unk{background:#fff;border-style:dashed;color:var(--muted)}
+  .ten-card.numbers .tbond{transform:scale(1.35);transform-origin:top center;margin:18px auto 50px}
+  .num-stage{display:block;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;font-size:15px;font-weight:600;color:#8C6A12;background:#FCF2D3;border:2px dashed #F2C95C;border-radius:14px;padding:4px 12px;margin-bottom:8px}
+  .ten-eq{text-align:center;font-size:clamp(24px,6vw,30px);font-weight:700;color:var(--muted);margin-top:8px}
+  .ten-eq span{color:var(--ink)}
+  /* fingers help */
+  .fingers{display:flex;justify-content:center;gap:10px;margin-top:10px}
+  .fingers svg{width:min(42vw,150px);height:auto}
+  .fingers .fg rect{fill:#F4C7A4;stroke:#D79E76;stroke-width:2}
+  .fingers .palm{fill:#F4C7A4;stroke:#D79E76;stroke-width:2}
+  .fingers .fg.down rect{fill:#FBE3CF;stroke:#E39A5F;stroke-dasharray:4 3}
+  .fingers .fg.lit rect{fill:#FFD98A;stroke:#D4A23A;stroke-dasharray:none}
+  .fingers .fg text{font-size:16px;font-weight:700;fill:#B8582F;font-family:'Fredoka',sans-serif}
+  .fing-cap{text-align:center;font-size:16px;color:var(--muted);margin-top:4px}
+  /* bead-bar answers (Montessori control of error) */
+  .bars-ans{background:var(--card);border:2px solid #F1E7D5;border-radius:24px;padding:12px 8px;margin:8px 0}
+  .bar-line{display:flex;align-items:center;gap:0;margin:0 auto 6px;width:max-content}
+  .bbar{display:flex;gap:var(--bg,2px);padding:3px;border-radius:999px;background:rgba(255,255,255,.7)}
+  .bbar i{display:block;width:var(--bw,22px);height:var(--bw,22px);border-radius:50%;background:var(--bc);box-shadow:inset -2px -3px 0 rgba(0,0,0,.15)}
+  .bbar i.over{outline:3px solid #E86A5C;outline-offset:-1px}
+  .bslot{position:relative;height:calc(var(--bw,22px) + 6px);border:3px dashed #B9B2C6;border-radius:999px;margin-left:2px;transition:border-color .3s}
+  .bslot .bbar{position:absolute;left:-3px;top:-3px}
+  .bslot.fit{border-color:transparent}
+  .bar-tag{font-size:13px;color:var(--muted);text-align:center;margin-bottom:2px}
+  .bar-choices{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:10px}
+  .bar-choice{padding:6px 10px;border-radius:999px;background:#FBF6EC;border:2px solid var(--line);box-shadow:0 4px 0 var(--line);min-width:120px;display:flex;justify-content:center}
+  .bar-choice:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+  .bar-choice.tried{opacity:.3}
+  /* rainbow of friends */
+  .rainbow{display:block;margin:6px auto 0;width:min(300px,82vw);height:auto}
+  .rainbow path{fill:none;stroke-width:6;stroke-linecap:round}
+  .rainbow .off{stroke:#E7E1D6;stroke-dasharray:3 8}
+  .rainbow .new{animation:arcIn 1s ease-out}
+  @keyframes arcIn{from{stroke-dasharray:0 400}to{stroke-dasharray:400 0}}
+  .rainbow text{font-size:15px;font-weight:700;fill:var(--ink);font-family:'Fredoka',sans-serif;text-anchor:middle}
+  .rb-cap{font-size:15px;color:var(--muted);margin-top:2px}
+
   /* ---------- Make 10 ---------- */
   .cell.slot{border:3px dashed var(--ac-m);cursor:pointer}
   .obj.added{background:rgba(162,214,184,.55)}
@@ -762,15 +867,26 @@
 
   <!-- ================= MAKE 10 ================= -->
   <section id="ten" class="screen">
-    <div class="card"><div id="tenVis"></div><div class="caption" id="tenCap"></div></div>
-    <div class="eq-strip">
-      <span class="snum" id="tenA"></span>
-      <div class="opw"><div class="op">+</div><small>more</small></div>
-      <span class="snum q" id="tenQ">?</span>
-      <div class="opw"><div class="op eqs">=</div><small>makes</small></div>
-      <span class="snum" id="tenT"></span>
+    <div class="steps" id="tenSteps">
+      <span class="stp s1" title="Count what we have">👆</span><span class="stp s2" title="Count the empty spaces">⭕</span><span class="stp s4" title="How many more?">❓</span>
     </div>
-    <div id="tenAskWrap"><div class="ask">How many more? 👇</div><div class="choices" id="tenChoices"></div></div>
+    <div class="card ten-card" id="tenCard">
+      <div class="ten-goal" id="tenGoal"></div>
+      <div class="tbox" id="tenBox"></div>
+      <div class="ten-legend" id="tenLegend"><span class="tl lh tl-wait" id="tenLH"></span><span class="tl la tl-wait" id="tenLA"></span></div>
+      <div class="tbond" id="tenBond">
+        <svg viewBox="0 0 200 118" aria-hidden="true"><line x1="100" y1="26" x2="26" y2="92"/><line x1="100" y1="26" x2="174" y2="92"/></svg>
+        <div class="tbc w" id="tenW">10<small>whole</small></div>
+        <div class="tbc p1 unk" id="tenP1">?</div>
+        <div class="tbc p2 unk" id="tenP2">?</div>
+      </div>
+      <div class="ten-eq" id="tenEq" hidden></div>
+      <div id="tenFingersWrap" hidden><div class="fingers" id="tenFingers"></div><div class="fing-cap" id="tenFingCap"></div></div>
+    </div>
+    <div id="tenAskWrap" hidden>
+      <div class="ask" id="tenAsk">How many more? 👇</div>
+      <div class="choices" id="tenChoices"></div>
+    </div>
     <div class="result" id="tenResult" hidden></div>
     <div class="footer">
       <button class="btn btn-help" id="tenHelp">💡 Help</button>
@@ -832,7 +948,7 @@
         <li><b>Concrete → Pictorial → Abstract</b> (Singapore Math): tap and count pictures first, then a number bond, then the number sentence.</li>
         <li><b>Number bonds:</b> “two parts make the whole” (3 and 2 make 5). In Add, the bond fills in as your child counts.</li>
         <li><b>Pictures → dots → numbers:</b> on Auto, Add moves on after 3 right answers in a row, and goes back a step if your child gets stuck twice.</li>
-        <li><b>Ten-frames &amp; making ten:</b> teen numbers are “10 and some more”.</li>
+        <li><b>Ten-frames &amp; making ten:</b> teen numbers are “10 and some more”. Make 10 starts with Make 5, uses an egg box, bus or car park, and asks your child to count the <b>empty spaces</b>. If your child is stuck, Ollie shows it on fingers: the fingers down are the missing ones.</li>
         <li><b>Montessori colours:</b> green squares are ones, blue bars are tens.</li>
         <li><b>Three-period lesson:</b> Learn (“This is 7”) → Find it (“Show me 7”) → How many?</li>
         <li><b>× is equal groups</b> (3 × 2 = 2 + 2 + 2). <b>÷ is fair sharing</b>, one at a time. At most 5 groups or friends.</li>
@@ -894,13 +1010,13 @@ const PRAISE = {
   cmp: ['You looked carefully!', 'You compared them!'],
   seq: ['You know the order!', 'Choo choo! You got it!'],
   look: ['Sharp eyes!', 'You saw it so fast!'],
-  ten: ['You filled the box!', 'You made it!'],
+  ten: ['You filled it up!', 'You made it!', 'Full! Well counted!'],
   story: ['You solved the story!', 'You acted it out!']
 };
 const nm = (t, n) => n === 1 ? t.one : t.many;
 
 /* ================= Saved state ================= */
-const S = {max: 10, stars: 0, stickers: [], prog: {}, rewards: true, ops: true, tipSeen: false, addMode: 'auto', addLevel: 0, addStreak: 0, addMissRun: 0, lookLevel: 0, lookStreak: 0, lookMissRun: 0};
+const S = {max: 10, stars: 0, stickers: [], prog: {}, rewards: true, ops: true, tipSeen: false, addMode: 'auto', addLevel: 0, addStreak: 0, addMissRun: 0, lookLevel: 0, lookStreak: 0, lookMissRun: 0, tenLevel: 0, tenStreak: 0, tenMissRun: 0, tenFound: {}};
 try{ Object.assign(S, JSON.parse(localStorage.getItem('mathGarden3') || '{}')); }catch(e){}
 ['numbers','add','sub','mul','div','cmp','seq','look','ten','story'].forEach(k => { if (typeof S.prog[k] !== 'number') S.prog[k] = 0; });
 S.max = Math.min(100, Math.max(5, S.max || 10));
@@ -1079,7 +1195,7 @@ $('#resetBtn').onclick = () => {
   clearTimeout(resetTimer);
   if ($('#resetBtn').dataset.armed){
     S.stars = 0; S.stickers = []; Object.keys(S.prog).forEach(k => S.prog[k] = 0);
-    S.addLevel = 0; S.addStreak = 0; S.addMissRun = 0; S.lookLevel = 0; S.lookStreak = 0; S.lookMissRun = 0; save(); cpaRender();
+    S.addLevel = 0; S.addStreak = 0; S.addMissRun = 0; S.lookLevel = 0; S.lookStreak = 0; S.lookMissRun = 0; S.tenLevel = 0; S.tenStreak = 0; S.tenMissRun = 0; S.tenFound = {}; save(); cpaRender();
     $('#starCount').textContent = 0; stickersRender();
     resetArm(false); $('#resetBtn').textContent = '✓ Reset done';
     resetTimer = setTimeout(() => resetArm(false), 2000);
@@ -1951,7 +2067,7 @@ $('#cmpNext').onclick = newCmp;
                Help counts along the track, then shows the bar with one more (or one less) bead.  */
 let Q = null;
 const CAR_COLORS = ['#FDE7D9', '#DEEEF8', '#DDF1E5', '#ECE7FA', '#FCF2D3'];
-const BEAD = {1: '#E86A5C', 2: '#6CC070', 3: '#F29BC0', 4: '#F2CF45', 5: '#86C7EC', 6: '#B795DA', 7: '#F4F1EA', 8: '#A9775A', 9: '#4D6DB5', 10: '#E2B33C'};
+const BEAD = {1: '#E86A5C', 2: '#6CC070', 3: '#F29BC0', 4: '#F2CF45', 5: '#86C7EC', 6: '#B795DA', 7: '#DDD5C6', 8: '#A9775A', 9: '#4D6DB5', 10: '#E2B33C'};
 function beadCol(n, extraTop, ghostTop){
   const c = document.createElement('div'); c.className = 'bead-col';
   for (let i = 0; i < n; i++){
@@ -2228,67 +2344,259 @@ $('#lookHelp').onclick = lookShow;
 $('#lookNew').onclick = newLook;
 $('#lookNext').onclick = newLook;
 
-/* ================= MAKE 10 ================= */
+/* ================= MAKE 10 =================
+   Ladder: 0 Make 5 with pictures · 1 Make 10 with pictures · 2 Make 10 with dots · 3 numbers only
+   Thinking steps (Singapore "missing part"): the whole is known → count what we have →
+   count the EMPTY spaces → that is how many more. Bond: whole filled first, one part, then "?".
+   Montessori: answer with bead bars that must fit the gap (too long sticks out, too short leaves a gap). */
 let K = null;
-function slotsFor(box, T){
-  if (T !== 5) return emptyFrames(box, T);
-  box.innerHTML = ''; box.className = '';
-  const wrap = document.createElement('div'); wrap.className = 'frames';
-  const fr = document.createElement('div'); fr.className = 'frame';
-  const cells = [];
-  for (let i = 0; i < 5; i++){ const c = document.createElement('div'); c.className = 'cell'; fr.appendChild(c); cells.push(c); }
-  wrap.appendChild(fr); box.appendChild(wrap);
-  return cells;
+const TEN_SCENES = [
+  {key: 'egg',  unit: 'egg',    units: 'eggs',    empty: 'empty cups',   icon: '🥚', there: 'in the box',  hold: T => `This egg box holds <b>${T}</b> eggs`, ask: 'How many more eggs fill the box?'},
+  {key: 'bus',  unit: 'friend', units: 'friends', empty: 'empty seats',  icon: '🐻', there: 'on the bus',  hold: T => `This bus has <b>${T}</b> seats`, ask: 'How many more friends can get on?', have: '🐻', add: '🐰'},
+  {key: 'park', unit: 'car',    units: 'cars',    empty: 'empty spaces', icon: '🚗', there: 'parked',      hold: T => `This car park has <b>${T}</b> spaces`, ask: 'How many more cars fit?', have: '🚗', add: '🚙'}
+];
+const DOT_SCENE = {key: 'dots', unit: 'dot', units: 'dots', empty: 'empty spaces', icon: '🟠', there: 'dots', hold: T => `The box holds <b>${T}</b> dots`, ask: 'How many more dots fill the box?'};
+// legend chips under the picture: they fill in with the same numbers as the bond
+function tenLegend(){
+  const sc = K.sc, lh = $('#tenLH'), la = $('#tenLA');
+  const known = K.step >= 2 || K.lvl === 3;
+  lh.innerHTML = `${sc.icon} <b>${known ? K.h : '?'}</b> ${sc.there}`; lh.classList.toggle('tl-wait', !known);
+  const counted = K.done || K.step >= 3;
+  la.innerHTML = `⭕ <b>${counted ? K.need : '?'}</b> ${sc.empty}`; la.classList.toggle('tl-wait', !counted);
+  $('#tenLegend').hidden = K.lvl === 3;
 }
+const tenMaxLevel = () => S.max < 10 ? 0 : 3;
+function tenItem(sc, kind){
+  if (sc.key === 'egg'){ const o = document.createElement('span'); o.className = 'obj egg'; o.dataset.v = 1; o.innerHTML = `<i class="eg ${kind}"></i>`; return o; }
+  if (sc.key === 'dots'){ const o = document.createElement('span'); o.className = 'obj cdot ' + (kind === 'have' ? 'da' : 'db'); o.dataset.v = 1; o.innerHTML = '<i></i>'; return o; }
+  return itemEl(kind === 'have' ? sc.have : sc.add);
+}
+function tenGhost(sc){
+  if (sc.key === 'egg'){ const g = document.createElement('i'); g.className = 'eg ghosted ghost'; g.style.width = '62%'; g.style.height = '78%'; return g; }
+  if (sc.key === 'dots'){ const g = document.createElement('span'); g.className = 'ghost'; g.style.cssText = 'width:60%;height:60%;border-radius:50%;border:2px dashed #5E9ECB;opacity:.35'; return g; }
+  const g = document.createElement('span'); g.className = 'ghost'; g.textContent = sc.add; g.style.fontSize = 'clamp(24px,6vw,32px)'; return g;
+}
+function tenSpot(n){
+  $('#tenBox').classList.toggle('spot', n === 1 || n === 2);
+  $$('#tenSteps .stp').forEach((el, i) => { el.classList.toggle('on', i + 1 === n); el.classList.toggle('done', i + 1 < n); });
+}
+
 function newTen(){
-  stopAll(); resetZone('ten');
-  const T = S.max < 10 ? 5 : (S.max >= 20 && Math.random() < .35 ? 20 : 10);
-  const h = rnd(T === 20 ? 8 : 1, T - 1), t = pick(THEMES);
-  K = {T, h, need: T - h, t, added: 0, done: false};
-  $('#titleText').textContent = `Make ${T}`;
-  $('#tenA').textContent = h; $('#tenT').textContent = T;
-  const q = $('#tenQ'); q.textContent = '?'; q.classList.add('q');
-  const cells = slotsFor($('#tenVis'), T);
-  cells.forEach((c, i) => {
-    if (i < h){ const o = itemEl(t.e); o.style.cursor = 'default'; c.appendChild(o); }
-    else { c.classList.add('slot'); c.onclick = tenAdd; }
-  });
-  K.slots = cells.slice(h);
-  $('#tenCap').textContent = T === 5 ? 'Fill the row of 5!' : T === 10 ? 'Fill the box of 10!' : 'Fill both boxes to 20!';
-  makeChoices($('#tenChoices'), K.need, [...near(K.need), h], () => {
-    stopAll(); K.done = true;
-    const p = pick(PRAISE.ten); win('ten', p);
-    K.slots.forEach((c, i) => { if (!c.querySelector('.obj')){ const o = itemEl(t.e); o.classList.add('added'); c.appendChild(o); enter(o, i * .05); } c.classList.remove('slot'); });
-    showAnswer('#tenQ', K.need);
-    guide(p, `${p} ${h} and ${K.need} make ${T}.`);
-    solved('ten', resHTML(`<b>${h}</b> and <b>${K.need}</b> make <b>${T}</b>`, bondHTML(T, h, K.need), `${h} + ${K.need} = ${T}`));
-  }, () => {
-    guide("Let's fill the box together!");
-    const r = run; setTimeout(() => { if (r === run) tenHelp(); }, 1500);
-  });
-  guide(`I have <b>${h}</b>. How many more make <b>${T}</b>?`, `I have ${h} ${nm(t, h)}. How many more do we need to make ${T}? Tap the empty spaces to fill them!`);
-  setHint(() => K.slots.find(c => !c.querySelector('.obj')));
+  const lvl = Math.min(S.tenLevel || 0, tenMaxLevel());
+  const T = lvl === 0 ? 5 : 10;
+  setupTen(T, rnd(1, T - 1), lvl, false);
 }
-// tap any empty space: the next space fills, counting 1, 2, 3…
-function tenAdd(){
-  if (!K || K.done || K.added >= K.need) return;
-  const c = K.slots[K.added];
-  const o = itemEl(K.t.e); o.classList.add('added'); c.appendChild(o); c.classList.remove('slot');
+function setupTen(T, h, lvl, missed){
+  stopAll(); resetZone('ten'); setHint(null);
+  const need = T - h;
+  const sc = lvl >= 2 ? DOT_SCENE : pick(TEN_SCENES);
+  K = {T, h, need, lvl, sc, step: 0, added: 0, miss: missed, wrongBars: 0, done: false, busy: false};
+  $('#titleText').textContent = `Make ${T}`;
+  const card = $('#tenCard'); card.classList.toggle('numbers', lvl === 3);
+  $('#tenSteps').hidden = lvl === 3;
+  $('#tenAskWrap').hidden = true; $('#tenFingersWrap').hidden = true; $('#tenBond').hidden = false;
+  $('#tenEq').hidden = lvl !== 3;
+  // bond: the whole is known from the start
+  $('#tenW').innerHTML = `${T}<small>whole</small>`;
+  ['#tenP1', '#tenP2'].forEach(id => { const e = $(id); e.classList.add('unk'); e.textContent = '?'; });
+  $('#tenGoal').innerHTML = lvl === 3
+    ? `<div class="num-stage">🌟 Numbers only, no pictures! Stuck? Tap <b>💡 Help</b> to see dots.</div><div><b>${T}</b> is the whole. One part is <b>${h}</b>.</div>`
+    : `${sc.hold(T)}`;
+
+  const box = $('#tenBox'); box.innerHTML = ''; box.className = 'tbox ' + (lvl === 3 ? 'numbers' : sc.key);
+  if (sc.key === 'bus' && lvl < 3) box.insertAdjacentHTML('beforeend', `<span class="bus-sign">🚌 ${T} seats</span><span class="bus-lamp"></span>`);
+  K.have = []; K.empties = [];
+  if (lvl < 3){
+    for (let i = 0; i < T; i++){
+      const c = document.createElement('div'); c.className = 'tcell';
+      if (i < h){ c.classList.add('th'); const o = tenItem(sc, 'have'); c.appendChild(o); K.have.push(o); }
+      else { c.classList.add('empty'); c.appendChild(tenGhost(sc)); c.onclick = () => tenFill(c); K.empties.push(c); }
+      box.appendChild(c);
+    }
+    K.ctr = makeCountable(K.have, {onCount: c => {
+      if (c === h && K.step === 1) setTimeout(() => tenAfterHave(), 750);
+    }});
+  }
+  tenLegend();
+  if (lvl === 3){
+    fillIn('#tenP1', h);
+    $('#tenEq').innerHTML = `<span>${h}</span> + ? = <span>${T}</span>`;
+    tenAsk();
+    guide(`<b>${h}</b> and what make <b>${T}</b>?`, `No pictures this time. ${T} is the whole, and one part is ${h}. What is the other part? You can tap help to see dots.`);
+    return;
+  }
+  K.step = 1; tenSpot(1);
+  guide(`${sc.hold(T)}. Count the <b>${sc.units}</b> first!`,
+        `${sc.hold(T).replace(/<[^>]+>/g, '')}. First, count the ${sc.units} we have. Tap each one!`);
+  setHint(() => K.ctr.firstLeft());
+}
+// step 1 done → the part we have fills in; then count the empty spaces
+function tenAfterHave(){
+  if (!K || K.step !== 1) return;
+  fillIn('#tenP1', K.h);
+  K.step = 2; tenLegend(); bounce($('#tenLH'));
+  if (K.lvl === 2){
+    // dots stage: count the empty spaces themselves; nothing drops in, a number marks each one
+    K.step = 2; tenSpot(2);
+    K.empties.forEach(c => c.classList.add('glow'));
+    guide(`We have <b>${K.h}</b>. Now count the <b>empty spaces</b>! Tap each one.`, `We have ${K.h}. Now count the empty spaces. Tap each empty space!`);
+    setHint(() => K.empties.find(c => c.classList.contains('empty') && !c.dataset.n), 2500);
+    return;
+  }
+  K.step = 2; tenSpot(2);
+  K.empties.forEach(c => c.classList.add('glow'));
+  guide(`We have <b>${K.h}</b>. Now count the <b>${K.sc.empty}</b>! Tap each one.`,
+        `We have ${K.h} ${K.h === 1 ? K.sc.unit : K.sc.units}. Now count the ${K.sc.empty}. Tap each one, and a ${K.sc.unit} goes in!`);
+  setHint(() => K.empties.find(c => c.classList.contains('empty')), 2500);
+}
+// tap an empty space: a new one goes right there, counting 1, 2, 3…
+function tenFill(c){
+  if (!K || K.step !== 2 || !c.classList.contains('empty')) return;
+  if (K.lvl === 2){
+    // mark the next empty space with its count, left to right
+    const e = K.empties.find(x => !x.dataset.n); if (!e) return;
+    K.added++; e.dataset.n = K.added; e.classList.remove('glow'); e.classList.add('ta');
+    const mark = document.createElement('span'); mark.className = 'obj'; mark.style.cursor = 'default'; e.appendChild(mark);
+    setBadge(mark, K.added); bounce(mark); sfx.pop(); say(String(K.added));
+    if (K.added === K.need){ K.step = 3; tenLegend(); bounce($('#tenLA')); setTimeout(() => tenAsk(), 900); }
+    else setHint(() => K.empties.find(x => !x.dataset.n), 2500);
+    return;
+  }
+  c = K.empties.find(x => x.classList.contains('empty'));   // fill left to right, so the count reads in order
+  c.classList.remove('empty', 'glow'); c.querySelector('.ghost')?.remove();
+  c.classList.add('ta');
+  const o = tenItem(K.sc, 'add'); c.appendChild(o);
   K.added++; setBadge(o, K.added); bounce(o);
   sfx.pop(); say(String(K.added));
-  if (K.added === K.need) setTimeout(() => guide(`We added <b>${K.need}</b> more! Tap <b>${K.need}</b>.`), 750);
+  if (K.added === K.need){ K.step = 3; tenLegend(); bounce($('#tenLA')); setTimeout(() => tenAsk(), 900); }
+  else setHint(() => K.empties.find(x => x.classList.contains('empty')), 2500);
 }
-async function tenHelp(){
+function tenAsk(){
+  K.step = 3; tenSpot(3); setHint(null); tenLegend();
+  $('#tenAskWrap').hidden = false;
+  $('#tenAsk').textContent = 'How many more? 👇';
+  makeChoices($('#tenChoices'), K.need, [K.need - 1, K.need + 1, K.need + 2, K.h], tenRight, () => {
+    K.miss = true;
+    if (K.lvl === 3){ guide("Let's use dots to help!"); const {T, h} = K; const r = run; setTimeout(() => { if (r === run) setupTen(T, h, 2, true); }, 1200); return; }
+    guide("Let's check with our fingers!");
+    const r = run; setTimeout(() => { if (r === run) tenFingers(); }, 1100);
+  });
+  if (K.lvl < 2) guide(`We filled <b>${K.need}</b> ${K.sc.empty}! How many more make <b>${K.T}</b>?`,
+                       `We filled ${K.need} ${K.sc.empty}. So how many more make ${K.T}? Tap the number!`);
+  else if (K.lvl === 2) guide(`<b>${K.need}</b> empty spaces! How many more make <b>${K.T}</b>?`,
+                              `${K.need} empty spaces. So how many more make ${K.T}? Tap the number!`);
+}
+
+/* ---------- fingers help: fingers down are the missing ones ---------- */
+function handSVG(upCount, startIdx, mirror){
+  // fingers left→right on a left hand: pinky, ring, middle, index, then thumb
+  const xs = [10, 27, 44, 61], tall = [38, 48, 54, 48];
+  let g = '';
+  for (let k = 0; k < 5; k++){
+    const idx = mirror ? startIdx + 4 - k : startIdx + k;   // global finger number, left to right across both hands
+    const up = idx < upCount;
+    if (k < 4){
+      const hgt = up ? tall[k] : 18, y = 62 - hgt;
+      g += `<g class="fg ${up ? '' : 'down'}" data-i="${idx}"><rect x="${xs[k]}" y="${y}" width="15" height="${hgt + 8}" rx="7.5"/><text x="${xs[k] + 7.5}" y="${y - 6}" text-anchor="middle"></text></g>`;
+    } else {
+      g += up
+        ? `<g class="fg" data-i="${idx}"><rect x="78" y="58" width="15" height="34" rx="7.5" transform="rotate(38 85 84)"/><text x="104" y="54" text-anchor="middle"></text></g>`
+        : `<g class="fg down" data-i="${idx}"><rect x="74" y="72" width="15" height="18" rx="7.5" transform="rotate(38 81 82)"/><text x="88" y="70" text-anchor="middle"></text></g>`;
+    }
+  }
+  return `<svg viewBox="0 0 112 118" ${mirror ? 'style="transform:scaleX(-1)"' : ''}><rect class="palm" x="6" y="58" width="74" height="54" rx="22"/>${g}</svg>`;
+}
+async function tenFingers(){
+  if (!K) return;
   const my = ++run;
-  K.slots.forEach(c => { const o = c.querySelector('.obj'); if (o) o.remove(); c.classList.add('slot'); });
-  K.added = 0;
-  for (let i = 0; i < K.need; i++){
+  K.miss = true;
+  const hands = K.T === 5 ? 1 : 2;
+  const wrap = $('#tenFingers');
+  wrap.innerHTML = handSVG(K.h, 0, false) + (hands === 2 ? handSVG(K.h, 5, true) : '');
+  // un-mirror the numbers on the right hand
+  if (hands === 2) wrap.lastElementChild.querySelectorAll('text').forEach(t => t.setAttribute('transform', `scale(-1,1) translate(${-2 * +t.getAttribute('x')},0)`));
+  $('#tenBond').hidden = true; $('#tenFingersWrap').hidden = false;
+  $('#tenFingCap').textContent = `${K.h} fingers up · fingers down are missing`;
+  guide(`Show <b>${K.T}</b> fingers. <b>${K.h}</b> are up. Count the fingers <b>down</b>!`,
+        `Let's use our fingers. ${K.T} fingers. ${K.h} fingers are up. The fingers down are the missing ones. Let's count them!`);
+  await sleep(3200);
+  const downs = [...wrap.querySelectorAll('.fg.down')].sort((a, b) => +a.dataset.i - +b.dataset.i);
+  for (let i = 0; i < downs.length; i++){
     if (my !== run) return;
-    tenAdd();
+    downs[i].classList.add('lit'); downs[i].querySelector('text').textContent = i + 1;
+    sfx.pop(); say(String(i + 1));
     await sleep(800);
   }
+  if (my !== run) return;
+  guide(`<b>${downs.length}</b> fingers down! Now pick the answer.`, `${downs.length} fingers down. Now pick the answer!`);
 }
-$('#tenHelp').onclick = tenHelp;
+
+/* ---------- right answer ---------- */
+function tenRight(){
+  if (K.done) return;
+  K.done = true; stopAll(); setHint(null);
+  const p = pick(PRAISE.ten); win('ten', p);
+  // fill any spaces still empty (dots stage) and finish the bond
+  K.empties.forEach((c, i) => { if (c.classList.contains('empty')){ c.classList.remove('empty', 'glow'); c.querySelector('.ghost')?.remove(); c.querySelector('.obj')?.remove(); const o = tenItem(K.sc, 'add'); c.appendChild(o); if (c.dataset.n) setBadge(o, +c.dataset.n); enter(o, i * .06); } });
+  K.empties.forEach(c => c.classList.add('ta'));
+  fillIn('#tenP2', K.need); tenLegend();
+  $('#tenFingersWrap').hidden = true; $('#tenBond').hidden = false;
+  if (K.lvl === 3) $('#tenEq').innerHTML = `<span>${K.h}</span> + <span>${K.need}</span> = <span>${K.T}</span>`;
+  tenSpot(4);
+  const key = Math.min(K.h, K.need);
+  const found = (S.tenFound[K.T] = S.tenFound[K.T] || []);
+  const isNew = !found.includes(key); if (isNew) found.push(key);
+  const msg = tenProgress();
+  guide(p, `${p} ${K.h} and ${K.need} make ${K.T}.` + (msg ? ' ' + msg.replace(/[^\w\s!.,]/g, '') : ''));
+  solved('ten', resHTML(`<b>${K.h}</b> and <b>${K.need}</b> make <b>${K.T}</b>`,
+    rainbowHTML(K.T, found, isNew ? key : null) + (msg ? `<div class="stage-up">${msg}</div>` : ''), `${K.h} + ${K.need} = ${K.T}`));
+}
+// "friends of 10": every pair found lights up an arc of the rainbow
+function rainbowHTML(T, found, fresh){
+  const nums = Array.from({length: T - 1}, (_, i) => i + 1), W = 300, pad = 22, gap = (W - pad * 2) / (nums.length - 1);
+  const x = n => pad + (n - 1) * gap, base = 120;
+  const cols = ['#E86A5C', '#F2A65A', '#E9C94A', '#7CC37F', '#6FA8DC'];
+  let paths = '', k = 0;
+  for (let a = 1; a <= Math.floor(T / 2); a++, k++){
+    const b = T - a, on = found.includes(a), cls = (on ? '' : 'off') + (fresh === a ? ' new' : '');
+    const col = on ? cols[k % cols.length] : '';
+    if (a === b) paths += `<path class="${cls}" d="M ${x(a) - 9} ${base - 16} a 9 9 0 1 1 18 0 a 9 9 0 1 1 -18 0" ${on ? `stroke="${col}"` : ''}/>`;
+    else { const r = (x(b) - x(a)) / 2; paths += `<path class="${cls}" d="M ${x(a)} ${base - 14} A ${r} ${Math.min(r, 100)} 0 0 1 ${x(b)} ${base - 14}" ${on ? `stroke="${col}"` : ''}/>`; }
+  }
+  const labels = nums.map(n => `<text x="${x(n)}" y="${base + 4}">${n}</text>`).join('');
+  const total = Math.floor(T / 2);
+  return `<svg class="rainbow" viewBox="0 0 ${W} 130" aria-label="Friends of ${T}">${paths}${labels}</svg>
+    <div class="rb-cap">🌈 Friends of ${T}: <b>${found.length}</b> of ${total} found</div>`;
+}
+// ladder: 3 right first-time → up; stuck twice in a row → down
+function tenProgress(){
+  let msg = '';
+  const top = tenMaxLevel();
+  if (!K.miss){
+    S.tenMissRun = 0; S.tenStreak = (S.tenStreak || 0) + 1;
+    if (S.tenStreak >= 3 && (S.tenLevel || 0) < top){
+      S.tenLevel = (S.tenLevel || 0) + 1; S.tenStreak = 0;
+      msg = ['', '🌟 Wow! Next time: Make 10!', '🌟 Wow! Next time we use dots!', '🌟 Wow! Next time: just numbers!'][S.tenLevel];
+    }
+  } else {
+    S.tenStreak = 0; S.tenMissRun = (S.tenMissRun || 0) + 1;
+    if (S.tenMissRun >= 2 && (S.tenLevel || 0) > 0){
+      S.tenLevel--; S.tenMissRun = 0;
+      msg = ['🌱 Next time: Make 5 again.', '🍳 Next time we use pictures to help.', '🟠 Next time we use dots to help.'][S.tenLevel];
+    }
+  }
+  save(); return msg;
+}
+// Help: count what we have → fill the empty spaces → fingers
+$('#tenHelp').onclick = async () => {
+  if (!K || K.done) return;
+  if (K.lvl === 3){ guide("Let's use dots to help!"); const {T, h} = K; setTimeout(() => setupTen(T, h, 2, true), 900); return; }
+  if (K.step === 1) K.ctr.auto();
+  else if (K.step === 2){
+    const my = ++run;
+    for (let i = 0; i < K.need; i++){ if (my !== run || K.step !== 2) return; const c = K.empties.find(x => x.classList.contains('empty')); if (c) tenFill(c); await sleep(800); }
+  } else tenFingers();
+};
 $('#tenNew').onclick = newTen;
 $('#tenNext').onclick = newTen;
 
