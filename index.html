@@ -247,8 +247,8 @@
   .bc{position:absolute;width:66px;height:66px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:28px;font-weight:700;line-height:1;border:4px solid var(--ac);background:#fff}
   .bc small{font-size:11px;font-weight:600;color:var(--muted);margin-top:2px}
   .bc.whole{left:77px;top:0;background:#FCF2D3;border-color:#D4A23A}
-  .bc.p1{left:0;top:90px;background:var(--ac-l)}
-  .bc.p2{right:0;top:90px;background:var(--ac-l)}
+  .bc.p1{left:0;top:90px;background:#FDE7D9;border-color:#DE8A62}
+  .bc.p2{right:0;top:90px;background:#DEEEF8;border-color:#5E9ECB}
 
   /* ---------- Hint hand ---------- */
   .hand{position:absolute;right:-16px;bottom:-28px;font-size:40px;pointer-events:none;z-index:6;animation:tapHint 1s ease-in-out infinite;filter:drop-shadow(0 2px 2px rgba(0,0,0,.18))}
@@ -301,6 +301,103 @@
   .method li{margin-bottom:5px}
   .sticker-big{font-size:120px;line-height:1.1;animation:spinIn .8s ease-out}
 
+  /* ---------- Add: part + part = whole ---------- */
+  .add-card{padding:12px 10px}
+  .trays{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;gap:6px}
+  .atray{border-radius:22px;padding:8px 6px 10px;display:flex;flex-direction:column;align-items:center;gap:6px;border:3px solid;transition:opacity .3s,transform .3s}
+  .ta{background:#FDE7D9;border-color:#F6C2A2}
+  .tb{background:#DEEEF8;border-color:#A9D3EE}
+  .atop{display:flex;flex-direction:column;align-items:center;line-height:1}
+  .anum{font-size:clamp(34px,8vw,42px);font-weight:700}
+  .ta .anum{color:#C8693F} .tb .anum{color:#3F7FAE}
+  .aname{font-size:14px;font-weight:600;color:var(--muted);margin-top:3px;text-align:center}
+  .atray .items{gap:2px}
+  .atray .items .obj{font-size:var(--tsz,26px);width:1.15em;height:1.15em;border-radius:10px}
+  .atray .badge{min-width:18px;height:18px;padding:0 4px;font-size:11px;top:-7px;right:-7px}
+  .atray .items.blocks{max-width:100%}
+  .plus-b{align-self:center;width:44px;height:44px;border-radius:50%;background:#DE8A62;color:#fff;font-size:30px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+  .merge{display:block;width:100%;height:38px}
+  .merge path{fill:none;stroke:#D9C7A8;stroke-width:4;stroke-linecap:round;stroke-dasharray:1 9}
+  .merge polygon{fill:#D9C7A8}
+  .basket{border-radius:24px;border:3px dashed #D9B68B;background:#FFF8EC;padding:10px 8px 8px;transition:opacity .3s;cursor:default}
+  .bhead{display:flex;align-items:center;justify-content:center;gap:8px;font-size:28px;font-weight:700;margin-bottom:10px;color:var(--muted)}
+  .chip{min-width:48px;height:48px;padding:0 8px;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-size:30px;color:var(--ink)}
+  .chip.ca{background:#FDE7D9;border:3px solid #F6C2A2}
+  .chip.cb{background:#DEEEF8;border:3px solid #A9D3EE}
+  .chip.cq{background:#fff;border:3px dashed var(--muted);color:var(--muted)}
+  .chip.cq.done{border:3px solid var(--ok);background:var(--ok-l);color:var(--ink)}
+  .blabel{text-align:center;font-size:15px;font-weight:600;color:#B08B63;margin-top:6px}
+  .basket .cell{width:clamp(40px,9.5vw,54px)}
+  .basket .cell.ca{background:#FDE7D9} .basket .cell.cb{background:#DEEEF8}
+  .basket .cell .obj{--osz:clamp(22px,5vw,30px)}
+  .basket .cell .badge{min-width:20px;height:20px;padding:0 4px;font-size:12px;top:-7px;right:-7px}
+  .bk-blocks{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;min-height:60px}
+  .bk-blocks .items{padding:6px;border-radius:14px;min-width:60px;min-height:50px}
+  .bk-blocks .bzA{background:#FDE7D9} .bk-blocks .bzB{background:#DEEEF8}
+  .spot{animation:glow 1.6s ease-in-out infinite}
+  .basket.spot{border-style:solid;cursor:pointer}
+  .dim{opacity:.45}
+  @keyframes glow{0%,100%{box-shadow:0 0 0 3px rgba(242,201,92,.95)}50%{box-shadow:0 0 0 9px rgba(242,201,92,.35)}}
+  /* step trail: 4 small circles joined by a line */
+  /* live number bond: part circles sit on the trays, the whole sits on the basket */
+  .atray{position:relative;padding-bottom:34px}
+  .bpart{position:absolute;left:50%;bottom:-28px;transform:translateX(-50%);z-index:3;width:56px;height:56px;border-radius:50%;background:#fff;border:4px solid;
+    display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;line-height:1}
+  .ta .bpart{border-color:#DE8A62;background:#FDE7D9;color:#B8582F}
+  .tb .bpart{border-color:#5E9ECB;background:#DEEEF8;color:#2F6E9B}
+  .bpart.unk,.bwhole.unk{background:#fff;border-style:dashed;color:var(--muted)}
+  .atray .aname{margin-top:2px}
+  .trays + .merge{margin-top:0}
+  .merge{position:relative;z-index:1;height:70px;margin-bottom:-2px}
+  .merge line{stroke:#C9C0AE;stroke-width:4;stroke-linecap:round}
+  .merge.flow line{stroke:#E6B85C;stroke-dasharray:7 9;animation:dashflow .7s linear infinite}
+  @keyframes dashflow{to{stroke-dashoffset:-16}}
+  .basket{position:relative;padding-top:38px}
+  .bwhole{position:absolute;left:50%;top:-30px;transform:translateX(-50%);z-index:3;width:60px;height:60px;border-radius:50%;background:#FCF2D3;border:4px solid #D4A23A;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:28px;font-weight:700;line-height:1}
+  .bwhole small,.bpart small{font-size:10px;font-weight:600;color:var(--muted);margin-top:1px}
+  .bsent{display:flex;align-items:center;justify-content:center;gap:6px;font-size:24px;font-weight:700;color:var(--muted);margin-top:10px}
+  .bsent .chip{min-width:40px;height:40px;font-size:24px;border-radius:12px}
+  .chip.unk{background:#fff!important;border-style:dashed!important;color:var(--muted)}
+  .fillpop{animation:pop .5s}
+  /* abstract stage: numbers only */
+  .add-card.abstract .atray{min-height:40px;background:transparent;border-color:transparent;padding-bottom:30px}
+  .add-card.abstract .plus-b{margin-top:30px}
+  .add-card.abstract .basket{background:transparent;border-color:transparent}
+  .add-card.abstract .bpart{width:68px;height:68px;font-size:34px;bottom:-34px}
+  .add-card.abstract .basket{padding-top:44px}
+  .add-card.abstract .bwhole{width:70px;height:70px;font-size:34px;top:-35px}
+  .add-card.abstract .bsent{font-size:30px}
+  .add-card.abstract .bsent .chip{min-width:52px;height:52px;font-size:32px}
+  /* pictorial stage: plain coloured dots */
+  .cdot i{display:block;width:72%;height:72%;border-radius:50%;background:var(--dc)}
+  .cdot.da{--dc:#E8875A} .cdot.db{--dc:#5E9ECB}
+  .stage-up{font-size:clamp(18px,4.4vw,22px);font-weight:600;color:#8C6A12;background:#FCF2D3;border-radius:16px;padding:8px 10px;margin-top:10px}
+  .seg.seg4{grid-template-columns:repeat(4,1fr)}
+
+  /* step 3: show clearly what to tap and where it goes */
+  .tapme{animation:wiggle 1.3s ease-in-out infinite;cursor:pointer}
+  .tapme:nth-child(2n){animation-delay:.25s} .tapme:nth-child(3n){animation-delay:.5s}
+  @keyframes wiggle{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-3px) rotate(-7deg)}75%{transform:translateY(-3px) rotate(7deg)}}
+  .atray.go-src{box-shadow:0 0 0 4px rgba(242,201,92,.55)}
+  .demo-hand{position:fixed;z-index:70;font-size:44px;pointer-events:none;line-height:1;filter:drop-shadow(0 3px 3px rgba(0,0,0,.2))}
+  .demo-ghost{position:fixed;z-index:69;pointer-events:none;display:flex;align-items:center;justify-content:center;opacity:.9}
+  .cell.next-slot{box-shadow:inset 0 0 0 3px #F2C95C;animation:slotPulse 1.2s ease-in-out infinite}
+  @keyframes slotPulse{50%{box-shadow:inset 0 0 0 5px rgba(242,201,92,.5)}}
+  .atray .hand{font-size:30px;right:-24px;bottom:-22px}
+  .tap-tip{text-align:center;font-size:clamp(17px,4.2vw,20px);font-weight:600;color:#9A7420;background:#FCF2D3;border:2px dashed #F2C95C;border-radius:16px;padding:6px 10px;margin:0 0 10px}
+
+  .steps{display:flex;justify-content:center;align-items:center;margin:0 0 10px}
+  .stp{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;background:var(--card);border:3px solid var(--line);opacity:.6;transition:transform .25s,opacity .25s}
+  .stp + .stp{margin-left:26px;position:relative}
+  .stp + .stp::before{content:'';position:absolute;right:100%;top:50%;width:26px;height:3px;margin-top:-1.5px;background:var(--line)}
+  .stp.s1{background:#FDE7D9;border-color:#F6C2A2} .stp.s2{background:#DEEEF8;border-color:#A9D3EE}
+  .stp.s3{background:#FFF3E0;border-color:#E6C79C} .stp.s4{background:#FCF2D3;border-color:#F2C95C}
+  .stp.on{opacity:1;transform:scale(1.22);box-shadow:0 0 0 4px rgba(242,201,92,.45)}
+  .stp.done{opacity:1}
+  .stp.done::after{content:'✓';position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:50%;background:var(--ok);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .stp{position:relative}
+
   /* ---------- Home sections ---------- */
   .sec-title{font-size:21px;margin:4px 4px 10px;display:flex;align-items:center;gap:8px}
   .menu + .sec-title{margin-top:20px}
@@ -336,10 +433,32 @@
   .engine{font-size:clamp(44px,11vw,58px);line-height:1;transform:scaleX(-1);margin-bottom:4px}
   .engine.rocket{transform:none}
   .rails{height:7px;margin:0 6px;border-top:3px solid #A38E72;background:repeating-linear-gradient(90deg,#C9B79C 0 8px,transparent 8px 18px)}
-  .train.go{animation:chug 1.6s ease-in forwards}
-  .train.blast{animation:blast 1.6s ease-in forwards}
+  .train.go,.train2.go{animation:chug 1.6s ease-in forwards}
+  .train.blast,.train2.blast{animation:blast 1.6s ease-in forwards}
   @keyframes chug{to{transform:translateX(130%)}}
   @keyframes blast{to{transform:translateY(-160%)}}
+
+  /* ---------- What's next v2: wagons carry Montessori bead bars ---------- */
+  .train2{display:flex;align-items:flex-end;justify-content:center;gap:3px;max-width:100%}
+  .cargo.teen .bead{width:8px}
+  .train2 .engine{font-size:clamp(36px,10vw,58px)}
+  .wagon{display:flex;flex-direction:column;align-items:center;width:clamp(50px,13.5vw,64px)}
+  .cargo{height:96px;display:flex;align-items:flex-end;justify-content:center;gap:2px;margin-bottom:3px}
+  .train2.nocargo .cargo{display:none}
+  #seqLegend:empty{display:none}
+  .bead-col{display:flex;flex-direction:column-reverse;gap:1px}
+  .bead{width:10px;height:8px;border-radius:50%;background:var(--bc);box-shadow:inset 0 -1px 0 rgba(0,0,0,.18)}
+  .bead.extra{animation:beadGlow 1s ease-in-out infinite;outline:2px solid #F2C95C;outline-offset:1px}
+  .bead.ghost{background:transparent;box-shadow:none;outline:2px dashed #B9B2C6;outline-offset:-1px}
+  @keyframes beadGlow{0%,100%{transform:scale(1)}50%{transform:scale(1.35)}}
+  .cargo.slot{width:30px;border:3px dashed #E2C2C2;border-radius:10px;background:rgba(255,255,255,.6)}
+  .cargo.slot.filled{border-color:transparent;background:none;width:auto}
+  .wagon .car{width:100%;margin-bottom:10px;height:clamp(60px,15vw,70px);padding-bottom:14px}
+  .wagon.lit .car{transform:translateY(-6px);box-shadow:0 0 0 4px rgba(242,201,92,.6)}
+  .wagon.lit .cargo{transform:translateY(-6px)}
+  .seq-q{text-align:center;font-size:clamp(20px,4.8vw,24px);font-weight:600;margin:4px 0 0;color:var(--ink)}
+  .seq-q b{color:var(--ac)}
+  .seq-legend{text-align:center;font-size:14px;color:var(--muted);margin-top:8px}
 
   /* ---------- Quick look ---------- */
   .look-card{position:relative;width:min(290px,78vw);aspect-ratio:1;margin:0 auto;border-radius:30px;background:#fff;border:4px solid var(--ac-m);
@@ -358,6 +477,19 @@
   .timer i{display:block;height:100%;width:0;background:var(--ac)}
   .timer.run i{width:100%;animation:shrink var(--t,2s) linear forwards}
   @keyframes shrink{from{width:100%}to{width:0}}
+
+  /* quick look: dots placed by position, several pattern types */
+  .ldots{position:absolute;inset:0}
+  .ld{position:absolute;width:var(--dsz,15%);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:var(--dc);cursor:pointer;transition:box-shadow .2s}
+  .ld.c0{--dc:#C477A8} .ld.c1{--dc:#E8875A} .ld.c2{--dc:#5E9ECB}
+  .ld.counted{background:var(--dc)!important;box-shadow:0 0 0 5px #A2D6B8}
+  .ld .badge{top:-8px;right:-8px}
+  .lcell{position:absolute;width:16%;aspect-ratio:1;border-radius:12px;background:#F5EDDB;transform:translate(-50%,-50%)}
+  .lframe{position:absolute;left:4%;right:4%;top:24%;bottom:24%;border:3px solid #E7D9BE;border-radius:16px;background:#FBF6EC}
+  .ldivider{position:absolute;left:50%;top:12%;bottom:12%;width:4px;margin-left:-2px;background:#EADFCB;border-radius:2px}
+  .ldomino{position:absolute;inset:6% 4%;border:3px solid #E7D9BE;border-radius:20px}
+  .look-level{text-align:center;font-size:15px;color:var(--muted);margin-top:10px}
+  .look-level b{color:var(--ac)}
 
   /* ---------- Make 10 ---------- */
   .cell.slot{border:3px dashed var(--ac-m);cursor:pointer}
@@ -493,18 +625,25 @@
 
   <!-- ================= ADD ================= -->
   <section id="add" class="screen">
-    <div class="card">
-      <div class="eq-row">
-        <div class="part pa"><div class="pnum" id="addA"></div><div id="addGA"></div></div>
-        <div class="opw"><div class="op">+</div><small>add</small></div>
-        <div class="part pb"><div class="pnum" id="addB"></div><div id="addGB"></div></div>
+    <div class="steps" id="addSteps">
+      <span class="stp s1" title="Count the first part">👆</span><span class="stp s2" title="Count the second part">👆</span><span class="stp s4" title="How many in all?">❓</span>
+    </div>
+    <div class="card add-card" id="addCard">
+      <div class="trays">
+        <div class="atray ta" id="trayA"><div id="addGA"></div><div class="aname" id="addAN"></div><div class="bpart unk" id="addA">?</div></div>
+        <div class="plus-b">+</div>
+        <div class="atray tb" id="trayB"><div id="addGB"></div><div class="aname" id="addBN"></div><div class="bpart unk" id="addB">?</div></div>
       </div>
-      <div class="eq-row">
-        <div class="opw"><div class="op eqs">=</div><small>makes</small></div>
-        <div class="part pr" id="addPR"><div class="pnum q" id="addQ">?</div><div id="addGR"></div></div>
+      <svg class="merge" id="addLines" viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="72" y1="0" x2="150" y2="70"/><line x1="228" y1="0" x2="150" y2="70"/>
+      </svg>
+      <div class="basket" id="basket">
+        <div class="bwhole unk" id="addW">?</div>
+        <div id="addGR"></div>
+        <div class="bsent"><span class="chip ca unk" id="eqA">?</span>+<span class="chip cb unk" id="eqB">?</span>=<span class="chip cq" id="addQ">?</span></div>
       </div>
     </div>
-    <div id="addAskWrap"><div class="ask">How many in all? 👇</div><div class="choices" id="addChoices"></div></div>
+    <div id="addAskWrap" hidden><div class="ask">How many in all? 👇</div><div class="choices" id="addChoices"></div></div>
     <div class="result" id="addResult" hidden></div>
     <div class="footer">
       <button class="btn btn-help" id="addHelp">💡 Help</button>
@@ -591,8 +730,12 @@
 
   <!-- ================= WHAT'S NEXT ================= -->
   <section id="seq" class="screen">
-    <div class="card"><div class="seq-dir" id="seqDir"></div><div class="train-wrap"><div class="train" id="train"></div><div class="rails"></div></div></div>
-    <div id="seqAskWrap"><div class="ask">Which number is missing? 👇</div><div class="choices" id="seqChoices"></div></div>
+    <div class="card">
+      <div class="seq-dir" id="seqDir"></div>
+      <div class="train-wrap"><div class="train2" id="train"></div><div class="rails"></div></div>
+      <div class="seq-legend" id="seqLegend"></div>
+    </div>
+    <div id="seqAskWrap"><div class="seq-q" id="seqAsk"></div><div class="choices" id="seqChoices"></div></div>
     <div class="result" id="seqResult" hidden></div>
     <div class="footer">
       <button class="btn btn-help" id="seqHelp">💡 Help</button>
@@ -606,8 +749,9 @@
     <div class="card">
       <div class="look-card"><div id="lookDots"></div><div class="cover" id="lookCover"></div></div>
       <div class="timer" id="lookTimer"><i></i></div>
+      <div class="look-level" id="lookLevel"></div>
     </div>
-    <div id="lookAskWrap" hidden><div class="ask">How many dots? 👇</div><div class="choices" id="lookChoices"></div></div>
+    <div id="lookAskWrap" hidden><div class="ask">How many did you see? 👇</div><div class="choices" id="lookChoices"></div></div>
     <div class="result" id="lookResult" hidden></div>
     <div class="footer">
       <button class="btn btn-help" id="lookHelp">👀 Look!</button>
@@ -666,6 +810,12 @@
     </div>
 
     <div class="set-card">
+      <div class="set-title">➕ Adding uses</div>
+      <div class="seg seg4" id="cpaSeg"><button data-v="auto">Auto</button><button data-v="0">🍎</button><button data-v="1">🟠</button><button data-v="2">3</button></div>
+      <div class="set-note" id="cpaNote"></div>
+    </div>
+
+    <div class="set-card">
       <div class="set-title">🧮 Activities</div>
       <label class="switch-row"><span><b>× Groups and ÷ Share</b><small>For children ready for more</small></span><input type="checkbox" class="switch" id="opsToggle"></label>
     </div>
@@ -680,7 +830,8 @@
       <summary>📘 How Math Garden teaches</summary>
       <ul>
         <li><b>Concrete → Pictorial → Abstract</b> (Singapore Math): tap and count pictures first, then a number bond, then the number sentence.</li>
-        <li><b>Number bonds:</b> “two parts make the whole” (3 and 2 make 5).</li>
+        <li><b>Number bonds:</b> “two parts make the whole” (3 and 2 make 5). In Add, the bond fills in as your child counts.</li>
+        <li><b>Pictures → dots → numbers:</b> on Auto, Add moves on after 3 right answers in a row, and goes back a step if your child gets stuck twice.</li>
         <li><b>Ten-frames &amp; making ten:</b> teen numbers are “10 and some more”.</li>
         <li><b>Montessori colours:</b> green squares are ones, blue bars are tens.</li>
         <li><b>Three-period lesson:</b> Learn (“This is 7”) → Find it (“Show me 7”) → How many?</li>
@@ -749,7 +900,7 @@ const PRAISE = {
 const nm = (t, n) => n === 1 ? t.one : t.many;
 
 /* ================= Saved state ================= */
-const S = {max: 10, stars: 0, stickers: [], prog: {}, rewards: true, ops: true, tipSeen: false};
+const S = {max: 10, stars: 0, stickers: [], prog: {}, rewards: true, ops: true, tipSeen: false, addMode: 'auto', addLevel: 0, addStreak: 0, addMissRun: 0, lookLevel: 0, lookStreak: 0, lookMissRun: 0};
 try{ Object.assign(S, JSON.parse(localStorage.getItem('mathGarden3') || '{}')); }catch(e){}
 ['numbers','add','sub','mul','div','cmp','seq','look','ten','story'].forEach(k => { if (typeof S.prog[k] !== 'number') S.prog[k] = 0; });
 S.max = Math.min(100, Math.max(5, S.max || 10));
@@ -799,7 +950,7 @@ const sfx = {
   whoosh: () => tone([900, 700, 520], .06, 'sine', .05),
   fanfare:() => tone([523, 659, 784, 659, 784, 1046], .13)
 };
-function stopAll(){ run++; if ('speechSynthesis' in window) speechSynthesis.cancel(); }
+function stopAll(){ run++; if ('speechSynthesis' in window) speechSynthesis.cancel(); document.querySelectorAll('.demo-hand,.demo-ghost').forEach(x => x.remove()); }
 
 /* ================= Ollie the owl ================= */
 function guide(html, speech){
@@ -815,7 +966,8 @@ $('#owl').onclick = $('#replay').onclick = () => say($('#say').dataset.say);
 
 /* ================= Hint hand (after a pause) ================= */
 let hintFn = null, hintTimer = null;
-function setHint(fn){ hintFn = fn; resetHint(); }
+let hintDelay = 5500;
+function setHint(fn, delay){ hintFn = fn; hintDelay = delay || 5500; resetHint(); }
 function resetHint(){
   clearTimeout(hintTimer);
   $$('.hand').forEach(h => h.remove());
@@ -825,7 +977,7 @@ function resetHint(){
     if (el && el.isConnected && el.offsetParent !== null){
       const h = document.createElement('span'); h.className = 'hand'; h.textContent = '👆'; el.appendChild(h);
     }
-  }, 5500);
+  }, hintDelay);
 }
 document.addEventListener('pointerdown', () => resetHint(), true);
 
@@ -892,7 +1044,7 @@ $('#rMinus').onclick = () => { tmpMax = Math.max(5, tmpMax - (tmpMax > 20 ? 5 : 
 $('#rPlus').onclick = () => { tmpMax = Math.min(100, tmpMax + (tmpMax >= 20 ? 5 : 1)); settingsRender(); };
 function openSettings(){
   stopAll(); hideTip();
-  tmpMax = S.max;
+  tmpMax = S.max; tmpCpa = String(S.addMode); cpaRender();
   $('#rewardsToggle').checked = S.rewards; $('#opsToggle').checked = S.ops;
   resetArm(false); settingsRender();
   $('#settings').hidden = false;
@@ -902,9 +1054,20 @@ $('#gearBtn').onclick = openSettings;
 $('#settingsClose').onclick = closeSettings;
 $('#settings').addEventListener('click', e => { if (e.target.id === 'settings') closeSettings(); });
 $('#settingsOk').onclick = () => {
-  S.max = tmpMax; S.rewards = $('#rewardsToggle').checked; S.ops = $('#opsToggle').checked; save();
+  S.max = tmpMax; S.rewards = $('#rewardsToggle').checked; S.ops = $('#opsToggle').checked;
+  S.addMode = tmpCpa === 'auto' ? 'auto' : +tmpCpa; save();
   closeSettings(); applyHome();
 };
+// Add: pictures → dots → numbers (Singapore concrete → pictorial → abstract)
+let tmpCpa = 'auto';
+const STAGE_NAMES = ['🍎 pictures', '🟠 dots', '3 numbers only'];
+function cpaRender(){
+  $$('#cpaSeg button').forEach(b => b.classList.toggle('active', b.dataset.v === tmpCpa));
+  $('#cpaNote').textContent = tmpCpa === 'auto'
+    ? `Grows from pictures to dots to numbers. Now: ${STAGE_NAMES[S.addLevel || 0]}`
+    : `Always: ${STAGE_NAMES[+tmpCpa]}`;
+}
+$$('#cpaSeg button').forEach(b => b.onclick = () => { tmpCpa = b.dataset.v; cpaRender(); });
 // two taps to reset, so it can't happen by accident
 let resetTimer = null;
 function resetArm(on){
@@ -915,7 +1078,8 @@ function resetArm(on){
 $('#resetBtn').onclick = () => {
   clearTimeout(resetTimer);
   if ($('#resetBtn').dataset.armed){
-    S.stars = 0; S.stickers = []; Object.keys(S.prog).forEach(k => S.prog[k] = 0); save();
+    S.stars = 0; S.stickers = []; Object.keys(S.prog).forEach(k => S.prog[k] = 0);
+    S.addLevel = 0; S.addStreak = 0; S.addMissRun = 0; S.lookLevel = 0; S.lookStreak = 0; S.lookMissRun = 0; save(); cpaRender();
     $('#starCount').textContent = 0; stickersRender();
     resetArm(false); $('#resetBtn').textContent = '✓ Reset done';
     resetTimer = setTimeout(() => resetArm(false), 2000);
@@ -1246,69 +1410,235 @@ function newQuiz(){
 $('#quizNext').onclick = newQuiz;
 $('#quizHelp').onclick = () => quizCtr && quizCtr.auto();
 
-/* ================= ADD (+) ================= */
+/* ================= ADD (+) : part + part = whole ================= */
+// Two colours of the same thing, so the two parts stay visible inside the whole
+const ADD_PAIRS = [
+  {a:'🍎', b:'🍏', an:'red apple',   ans:'red apples',   bn:'green apple',   bns:'green apples',   all:'apples'},
+  {a:'🐟', b:'🐠', an:'blue fish',   ans:'blue fish',    bn:'yellow fish',   bns:'yellow fish',    all:'fish'},
+  {a:'🌸', b:'🌼', an:'pink flower', ans:'pink flowers', bn:'yellow flower', bns:'yellow flowers', all:'flowers'},
+  {a:'🚗', b:'🚙', an:'red car',     ans:'red cars',     bn:'blue car',      bns:'blue cars',      all:'cars'},
+  {a:'🔴', b:'🔵', an:'red dot',     ans:'red dots',     bn:'blue dot',      bns:'blue dots',      all:'dots'}
+];
+const BLOCK_PAIR = {a:'', b:'', an:'block', ans:'blocks', bn:'block', bns:'blocks', all:'blocks'};
+const DOT_PAIR = {a:'', b:'', an:'orange dot', ans:'orange dots', bn:'blue dot', bns:'blue dots', all:'dots'};
 let A = null;
+const aName = n => n === 1 ? A.P.an : A.P.ans;
+const bName = n => n === 1 ? A.P.bn : A.P.bns;
+const addStage = () => S.addMode === 'auto' ? (S.addLevel || 0) : +S.addMode;
+
+function dotItems(box, n, cls){
+  box.innerHTML = ''; box.className = 'items';
+  box.style.setProperty('--cols', Math.min(5, Math.max(1, n)));
+  return Array.from({length: n}, () => {
+    const o = document.createElement('span'); o.className = 'obj cdot ' + cls; o.dataset.v = 1; o.innerHTML = '<i></i>';
+    box.appendChild(o); return o;
+  });
+}
+// fill a circle or chip of the live number bond
+function fillIn(id, v){ const el = $(id); el.classList.remove('unk'); el.textContent = v; el.classList.remove('fillpop'); void el.offsetWidth; el.classList.add('fillpop'); }
+function clearIn(id){ const el = $(id); el.classList.add('unk'); el.textContent = '?'; }
+
 function newAdd(){
-  stopAll(); resetZone('add');
   const M = S.max;
-  const s = rnd(M > 20 ? 10 : 2, M), a = rnd(1, s - 1), b = s - a;
-  const blocks = s > 20, t = blocks ? BLOCKS : pick(THEMES);
-  A = {a, b, s, t, blocks};
-  $('#addA').textContent = a; $('#addB').textContent = b;
-  const q = $('#addQ'); q.textContent = '?'; q.classList.add('q');
-  $('#addPR').classList.remove('solved');
-  $('#add .eq-row').classList.toggle('stack', blocks || Math.max(a, b) > 5);
-  const ia = fillBox($('#addGA'), a, t.e, blocks), ib = fillBox($('#addGB'), b, t.e, blocks);
+  const s = rnd(M > 20 ? 10 : 2, M), a = rnd(1, s - 1);
+  setupAdd(a, s - a, addStage(), false);
+}
+
+function setupAdd(a, b, stage, missed){
+  stopAll(); resetZone('add'); $('#addAskWrap').hidden = true;
+  const s = a + b;
+  const blocks = s > 20 && stage < 2;
+  const P = blocks ? BLOCK_PAIR : stage === 1 ? DOT_PAIR : stage === 0 ? pick(ADD_PAIRS) : DOT_PAIR;
+  A = {a, b, s, P, blocks, stage, step: 0, moved: 0, miss: missed};
+  const card = $('#addCard');
+  card.classList.toggle('abstract', stage === 2);
+  $('#addSteps').hidden = stage === 2;
+  ['#addA', '#addB', '#addW', '#eqA', '#eqB'].forEach(clearIn);
+  const q = $('#addQ'); q.textContent = '?'; q.classList.remove('done');
+  $('#addLines').classList.remove('flow');
+  $('#addAN').textContent = stage === 2 ? '' : aName(a);
+  $('#addBN').textContent = stage === 2 ? '' : bName(b);
   const gr = $('#addGR');
-  if (blocks){ gr.innerHTML = ''; gr.className = ''; } else emptyFrames(gr, s);   // empty "basket" ten-frame
-  A.items = [...ia, ...ib];
-  A.ctr = makeCountable(A.items, {onCount: c => {
-    if (c === s && !$('#addChoices').dataset.done) setTimeout(() => guide(`You counted <b>${c}</b>! Tap <b>${c}</b> below.`), 800);
-  }});
+
+  if (stage === 2){
+    // numbers only: the bond and the number sentence, no pictures
+    $('#addGA').innerHTML = ''; $('#addGB').innerHTML = ''; gr.innerHTML = ''; gr.className = '';
+    fillIn('#addA', a); fillIn('#addB', b); fillIn('#eqA', a); fillIn('#eqB', b);
+    A.ia = []; A.ib = []; A.total = 0; A.cells = null; A.ctrAll = null;
+    A.step = 3; addSpot(5);
+    $('#addAskWrap').hidden = false;
+    guide(`Two parts: <b>${a}</b> and <b>${b}</b>. What is the whole?`,
+          `No pictures this time! The parts are ${a} and ${b}. ${a} plus ${b} makes what? Tap the number. You can tap help to see dots.`);
+    setHint(null);
+  } else {
+    if (stage === 1 && !blocks){ A.ia = dotItems($('#addGA'), a, 'da'); A.ib = dotItems($('#addGB'), b, 'db'); }
+    else { A.ia = fillBox($('#addGA'), a, P.a, blocks); A.ib = fillBox($('#addGB'), b, P.b, blocks); }
+    A.total = A.ia.length + A.ib.length;
+    [[$('#addGA'), a], [$('#addGB'), b]].forEach(([box, v]) => {
+      const cols = Math.min(5, v);
+      box.style.setProperty('--tsz', `min(30px, calc((44vw - 62px) / ${(cols * 1.2).toFixed(2)}))`);
+    });
+    if (blocks){ gr.className = 'bk-blocks'; gr.innerHTML = '<div class="items blocks bzA"></div><div class="items blocks bzB"></div>'; A.cells = null; }
+    else {
+      A.cells = emptyFrames(gr, s);
+      A.cells.forEach((c, i) => { if (i < a) c.classList.add('ca'); else if (i < s) c.classList.add('cb'); });
+    }
+    // as soon as a part is counted, it goes into the basket (the whole)
+    A.ctrA = makeCountable(A.ia, {attach: false, onCount: c => { if (c === a) setTimeout(() => addGroupIn('a'), 700); }});
+    A.ctrB = makeCountable(A.ib, {attach: false, onCount: c => { if (c === b) setTimeout(() => addGroupIn('b'), 700); }});
+    A.ia.forEach(el => el.onclick = () => addTap(el, 'a'));
+    A.ib.forEach(el => el.onclick = () => addTap(el, 'b'));
+  }
+  $('#basket').onclick = null;
+
   makeChoices($('#addChoices'), s, near(s), () => {
-    stopAll();
+    stopAll(); setHint(null);
     const p = pick(PRAISE.add);
     win('add', p);
-    showAnswer('#addQ', s);
-    $('#addPR').classList.add('solved');
-    if (blocks) fillBox(gr, s, t.e, true).forEach((el, i) => enter(el, Math.min(i * .05, 1)));
-    else emptyFrames(gr, s).forEach((c, i) => { if (i < s){ const o = itemEl(t.e); c.appendChild(o); enter(o, i * .05); } });
-    guide(`${p}`, `${p} ${a} and ${b} make ${s}. ${a} plus ${b} equals ${s}!`);
-    solved('add', resHTML(`<b>${a}</b> and <b>${b}</b> make <b>${s}</b>`, bondHTML(s, a, b), `${a} + ${b} = ${s}`));
+    q.textContent = s; q.classList.add('done'); bounce(q);
+    fillIn('#addW', s);
+    addSpot(5);
+    const stageMsg = addProgress();
+    const big = Math.max(a, b), small = Math.min(a, b);
+    // Singapore "count on": start from the bigger part
+    const countOn = !blocks && small <= 3 && big >= 3
+      ? `<div class="res-rep">🐸 Quick way: start at <b>${big}</b>, count on: ${Array.from({length: small}, (_, i) => big + i + 1).join(', ')}</div>` : '';
+    guide(p, `${p} ${a} and ${b} make ${s}. ${a} plus ${b} equals ${s}!` + (stageMsg ? ' ' + stageMsg.replace(/[^\w\s!.,]/g, '') : ''));
+    const line = stage === 2 ? `<b>${a}</b> and <b>${b}</b> make <b>${s}</b>` : `<b>${a}</b> ${aName(a)} and <b>${b}</b> ${bName(b)} make <b>${s}</b> ${P.all}`;
+    solved('add', resHTML(line, countOn + (stageMsg ? `<div class="stage-up">${stageMsg}</div>` : ''), `${a} + ${b} = ${s}`));
   }, () => {
-    guide("Let's check together! 🤝");
-    const r = run; setTimeout(() => { if (r === run) addHelp(); }, 1800);
+    A.miss = true;
+    if (A.stage === 2){
+      // stuck on numbers: go back to dots for this question
+      guide("Let's use dots to help!");
+      const r = run; setTimeout(() => { if (r === run) setupAdd(a, b, 1, true); }, 1300);
+      return;
+    }
+    guide("Let's count on together!");
+    const r = run; setTimeout(() => { if (r === run) addCountOn(); }, 1300);
   });
-  if (blocks) guide(`<b>${a}</b> and <b>${b}</b>. How many in all?`, `${a} and ${b}. How many in all? Tap the blocks to count, or tap help.`);
-  else guide(`<b>${a}</b> ${nm(t, a)} and <b>${b}</b> more. How many?`, `${a} ${nm(t, a)} and ${b} more ${nm(t, b)}. How many in all? Tap each one to count!`);
-  setHint(() => A.ctr.firstLeft() || $('#addHelp'));
+  if (stage < 2) addStep(1);
 }
-// Help: everything flies into the answer basket, counting as it goes
-async function addHelp(){
+
+// Auto stage: 3 right first-time → next stage; stuck twice → back a stage
+function addProgress(){
+  if (S.addMode !== 'auto') return '';
+  let msg = '';
+  if (!A.miss){
+    S.addMissRun = 0; S.addStreak = (S.addStreak || 0) + 1;
+    if (S.addStreak >= 3 && (S.addLevel || 0) < 2){
+      S.addLevel = (S.addLevel || 0) + 1; S.addStreak = 0;
+      msg = S.addLevel === 1 ? '🌟 Wow! Next time we use dots 🟠🔵' : '🌟 Wow! Next time: just numbers!';
+    }
+  } else {
+    S.addStreak = 0; S.addMissRun = (S.addMissRun || 0) + 1;
+    if (S.addMissRun >= 2 && (S.addLevel || 0) > 0){
+      S.addLevel--; S.addMissRun = 0;
+      msg = S.addLevel === 0 ? '🍎 Next time we use pictures to help.' : '🟠 Next time we use dots to help.';
+    }
+  }
+  save();
+  return msg;
+}
+
+// spotlight: what to touch now is bright and glowing; the rest is quiet
+function addSpot(n){
+  const tA = $('#trayA'), tB = $('#trayB'), bk = $('#basket');
+  tA.classList.toggle('spot', n === 1); tB.classList.toggle('spot', n === 2); bk.classList.toggle('spot', n === 3);
+  tA.classList.toggle('dim', n === 2 || n === 3); tB.classList.toggle('dim', n === 1 || n === 3); bk.classList.toggle('dim', n === 1);
+  $$('#addSteps .stp').forEach((el, i) => { el.classList.toggle('on', i + 1 === n); el.classList.toggle('done', i + 1 < n); });
+}
+
+/* Steps: 1 count the first part → it goes into the basket
+          2 count the second part → it goes into the basket
+          3 how many in all? (count all, or Help = count on)                         */
+function addStep(n){
+  if (!A || A.step >= n) return;
+  A.step = n; addSpot(n);
+  const {a, b, s, P} = A;
+  if (n === 1){
+    guide(`<b>${a}</b> ${aName(a)} and <b>${b}</b> ${bName(b)}. Count the <b>${aName(2)}</b>!`,
+          `Here are ${a} ${aName(a)} and ${b} ${bName(b)}. First, count the ${aName(2)}. Tap each one!`);
+    setHint(() => A.ctrA.firstLeft());
+  } else if (n === 2){
+    guide(`Now count the <b>${bName(2)}</b>!`, `Now count the ${bName(2)}. Tap each one!`);
+    setHint(() => A.ctrB.firstLeft());
+  } else if (n === 3){
+    A.baskA = A.cells ? A.cells.slice(0, a).map(c => c.querySelector('.obj')).filter(Boolean) : [...$$('#addGR .bzA > *')];
+    A.baskB = A.cells ? A.cells.slice(a, s).map(c => c.querySelector('.obj')).filter(Boolean) : [...$$('#addGR .bzB > *')];
+    A.ctrAll = makeCountable([...A.baskA, ...A.baskB], {onCount: c => {
+      if (c === s && !$('#addChoices').dataset.done) setTimeout(() => guide(!A.blocks && s > 10
+        ? `<b>10</b> and <b>${s - 10}</b> more make <b>${s}</b>! Tap <b>${s}</b>.` : `You counted <b>${s}</b>! Tap <b>${s}</b> below.`), 800);
+    }});
+    guide(`All together! How many <b>${P.all}</b> now?`,
+          `${a} and ${b} are together in the basket. How many ${P.all} are there now? Count them, then tap the number!`);
+    $('#addAskWrap').hidden = false;
+    setHint(() => A.ctrAll.firstLeft());
+  }
+}
+
+function addTap(el, g){
+  if (!A || A.busy) return;
+  if (A.step === 1){ if (g === 'a') A.ctrA.mark(el); else guide(`First, count the <b>${aName(2)}</b>!`); }
+  else if (A.step === 2){ if (g === 'b') A.ctrB.mark(el); else guide(`Now count the <b>${bName(2)}</b>!`); }
+}
+
+// one counted part moves, piece by piece, into its own coloured spaces in the basket
+async function addGroupIn(g){
+  if (!A || A.busy) return;
+  A.busy = true; setHint(null);
+  const my = run;
+  const items = g === 'a' ? A.ia : A.ib, n = g === 'a' ? A.a : A.b;
+  const name = g === 'a' ? aName(n) : bName(n);
+  fillIn(g === 'a' ? '#addA' : '#addB', n); fillIn(g === 'a' ? '#eqA' : '#eqB', n);   // the part of the bond fills in
+  $('#basket').classList.remove('dim');
+  $('#addLines').classList.add('flow');
+  guide(`<b>${n}</b> ${name}! Into the basket 🧺`, `${n} ${name}! Into the basket they go.`);
+  await sleep(1200);
+  for (let i = 0; i < items.length; i++){
+    if (my !== run){ A.busy = false; return; }
+    const el = items[i];
+    el.classList.add('moved');
+    const c = freshCopy(el); c.style.visibility = 'hidden'; c.onclick = null;
+    const target = A.cells ? A.cells[g === 'a' ? i : A.a + i] : $(g === 'a' ? '#addGR .bzA' : '#addGR .bzB');
+    target.appendChild(c);
+    sfx.whoosh();
+    flyTo(el, c, 450).then(() => { c.style.visibility = 'visible'; bounce(c); });
+    await sleep(items.length > 10 ? 130 : 240);
+  }
+  await sleep(750);
+  $('#addLines').classList.remove('flow');
+  A.busy = false;
+  if (my !== run) return;
+  addStep(g === 'a' ? 2 : 3);
+}
+
+// Singapore "count on": we already know the first part, so start there and count the rest
+async function addCountOn(){
+  if (!A || !A.ctrAll) return;
   const my = ++run;
-  A.ctr.reset();
-  A.items.forEach(el => el.classList.remove('moved'));
-  const gr = $('#addGR');
-  const cells = A.blocks ? null : emptyFrames(gr, A.s);
-  if (A.blocks){ gr.innerHTML = ''; gr.className = 'items blocks'; }
-  guide("Let's put them together! Count with me.");
-  await sleep(1700);
-  let total = 0, idx = 0;
-  for (const el of A.items){
+  A.ctrAll.reset();
+  let tot = 0;
+  A.baskA.forEach(el => { tot += +el.dataset.v; el.classList.add('counted'); setBadge(el, tot); });
+  sfx.chime();
+  guide(`We know there are <b>${A.a}</b>. Count on! 👆`, `We already know there are ${A.a} ${aName(A.a)}. Start at ${A.a}, and count on!`);
+  await sleep(2700);
+  for (const el of A.baskB){
     if (my !== run) return;
-    const c = freshCopy(el); c.style.visibility = 'hidden'; (cells ? cells[idx++] : gr).appendChild(c);
-    await flyTo(el, c, 420);
-    if (my !== run) return;
-    el.classList.add('moved'); c.style.visibility = 'visible';
-    total += +el.dataset.v; setBadge(c, total); bounce(c);
-    sfx.pop(); say(String(total));
-    await sleep(+el.dataset.v > 1 ? 750 : 480);
+    tot += +el.dataset.v; el.classList.add('counted'); setBadge(el, tot); bounce(el);
+    sfx.pop(); say(String(tot));
+    await sleep(850);
   }
   if (my !== run) return;
-  guide(!A.blocks && total > 10 ? `<b>10</b> and <b>${total - 10}</b> more make <b>${total}</b>!` : `All together: <b>${total}</b>!`,
-        !A.blocks && total > 10 ? `10 and ${total - 10} more make ${total}! Find ${total} below.` : `All together there are ${total}! Find ${total} below.`);
+  guide(`Start at <b>${A.a}</b>, count on to <b>${tot}</b>! Tap <b>${tot}</b>.`);
 }
-$('#addHelp').onclick = addHelp;
+
+// Help does the current step with the child
+$('#addHelp').onclick = () => {
+  if (!A || A.busy) return;
+  if (A.stage === 2){ guide("Let's use dots to help!"); const {a, b} = A; setTimeout(() => setupAdd(a, b, 1, true), 900); return; }
+  ({1: () => A.ctrA.auto(), 2: () => A.ctrB.auto(), 3: addCountOn})[A.step]?.();
+};
 $('#addNew').onclick = newAdd;
 $('#addNext').onclick = newAdd;
 
@@ -1613,102 +1943,261 @@ $('#cmpHelp').onclick = cmpHelp;
 $('#cmpNew').onclick = newCmp;
 $('#cmpNext').onclick = newCmp;
 
-/* ================= WHAT'S NEXT (train) ================= */
+/* ================= WHAT'S NEXT =================
+   Montessori: every wagon carries a bead bar (short bead stair colours), so each number is
+               visibly "one more" than the one before: the bars make a staircase.
+               11–20 use the golden ten bar plus a coloured bar, like the teen bead hanger.
+   Singapore:  number track language: "1 more than 4 is 5", "1 less than 6 is 5".
+               Help counts along the track, then shows the bar with one more (or one less) bead.  */
 let Q = null;
 const CAR_COLORS = ['#FDE7D9', '#DEEEF8', '#DDF1E5', '#ECE7FA', '#FCF2D3'];
+const BEAD = {1: '#E86A5C', 2: '#6CC070', 3: '#F29BC0', 4: '#F2CF45', 5: '#86C7EC', 6: '#B795DA', 7: '#F4F1EA', 8: '#A9775A', 9: '#4D6DB5', 10: '#E2B33C'};
+function beadCol(n, extraTop, ghostTop){
+  const c = document.createElement('div'); c.className = 'bead-col';
+  for (let i = 0; i < n; i++){
+    const b = document.createElement('i'); b.className = 'bead'; b.style.setProperty('--bc', BEAD[n] || BEAD[10]);
+    if (n === 7) b.style.boxShadow = 'inset 0 0 0 1px #CFC6B4';
+    if (extraTop && i === n - 1) b.classList.add('extra');
+    c.appendChild(b);
+  }
+  if (ghostTop){ const g = document.createElement('i'); g.className = 'bead ghost'; c.appendChild(g); }
+  return c;
+}
+// bead bar for a number: 1–10 one bar, 11–20 golden ten + coloured bar
+function cargoFor(box, n, opt = {}){
+  box.innerHTML = ''; box.classList.toggle('teen', n > 10);
+  if (n <= 0) return;
+  if (n <= 10) box.appendChild(beadCol(n, opt.extra, opt.ghost));
+  else {
+    box.appendChild(beadCol(10, false, false));
+    if (n === 20) box.appendChild(beadCol(10, opt.extra, opt.ghost));
+    else box.appendChild(beadCol(n - 10, opt.extra, opt.ghost));
+  }
+}
 function newSeq(){
   stopAll(); resetZone('seq'); setHint(null);
   const M = S.max, len = 5;
-  const down = Math.random() < .3;
-  const start = down ? rnd(len - 1, M) : rnd(0, M - len + 1);
+  const r = Math.random();
+  const kind = r < .4 ? 'next' : r < .7 ? 'missing' : 'down';
+  const down = kind === 'down';
+  const start = down ? rnd(len - 1, M) : rnd(1, M - len + 1);
   const nums = Array.from({length: len}, (_, i) => down ? start - i : start + i);
-  const gap = rnd(1, len - 1);
-  Q = {nums, gap, down, ans: nums[gap]};
-  $('#seqDir').textContent = down ? '🚀 Count down!' : '🚂 Count up!';
-  const tr = $('#train'); tr.className = 'train'; tr.innerHTML = '';
-  Q.cars = nums.map((n, i) => {
-    const c = document.createElement('div'); c.className = 'car' + (i === gap ? ' gap' : '');
-    c.style.setProperty('--cc', CAR_COLORS[i % 5]); c.textContent = i === gap ? '?' : n;
-    tr.appendChild(c); enter(c, i * .08);
-    return c;
+  const gap = kind === 'next' ? len - 1 : rnd(1, len - 1 - (kind === 'missing' ? 1 : 0));
+  const beads = false;   // just the train: no bead bars
+  Q = {nums, gap, down, kind, ans: nums[gap], prev: nums[gap - 1], beads};
+  $('#seqDir').textContent = down ? '🚀 Count down: 1 less each time' : '🚂 Count up: 1 more each time';
+  $('#seqLegend').textContent = !beads ? '' : Math.max(...nums) > 10 ? 'Gold bar = 10 beads' : down ? 'Each bar has one less bead 🪜' : 'Each bar has one more bead 🪜';
+  const tr = $('#train'); tr.className = 'train2' + (beads ? '' : ' nocargo'); tr.innerHTML = '';
+  Q.wagons = nums.map((n, i) => {
+    const w = document.createElement('div'); w.className = 'wagon';
+    const cargo = document.createElement('div'); cargo.className = 'cargo' + (i === gap ? ' slot' : '');
+    const car = document.createElement('div'); car.className = 'car' + (i === gap ? ' gap' : '');
+    car.style.setProperty('--cc', CAR_COLORS[i % 5]); car.textContent = i === gap ? '?' : n;
+    if (beads && i !== gap) cargoFor(cargo, n);
+    w.append(cargo, car); tr.appendChild(w); enter(w, i * .08);
+    return {w, cargo, car};
   });
   const head = document.createElement('div'); head.className = 'engine' + (down ? ' rocket' : '');
   head.textContent = down ? '🚀' : '🚂'; tr.appendChild(head);
-  makeChoices($('#seqChoices'), Q.ans, near(Q.ans), () => {
-    stopAll();
+
+  const ask = kind === 'next' ? 'What comes <b>next</b>?' : down ? 'Which number is <b>missing</b>?' : 'Which number is <b>missing</b>?';
+  $('#seqAsk').innerHTML = ask + ' 👇';
+  // neighbours make the best "almost" answers when counting by ones
+  makeChoices($('#seqChoices'), Q.ans, [Q.ans - 1, Q.ans + 1, Q.ans - 2, Q.ans + 2], () => {
+    stopAll(); setHint(null);
     const p = pick(PRAISE.seq); win('seq', p);
-    const c = Q.cars[gap]; c.classList.remove('gap', 'peek'); c.textContent = Q.ans; bounce(c);
-    guide(p, `${p} ${nums.join(', ')}!`);
-    setTimeout(() => { sfx.whoosh(); $('#train').classList.add(Q.down ? 'blast' : 'go'); }, 1400);
-    solved('seq', resHTML(Q.down ? `Counting down, <b>${Q.ans}</b> comes after <b>${nums[gap - 1]}</b>` : `<b>${Q.ans}</b> comes after <b>${nums[gap - 1]}</b>`, '', nums.join(', ')));
+    const g = Q.wagons[gap];
+    g.car.classList.remove('gap'); g.car.textContent = Q.ans; bounce(g.car);
+    if (beads){ g.cargo.classList.add('filled'); cargoFor(g.cargo, Q.ans); }
+    const rel = down ? `1 less than <b>${Q.prev}</b> is <b>${Q.ans}</b>` : `1 more than <b>${Q.prev}</b> is <b>${Q.ans}</b>`;
+    guide(p, `${p} ${down ? `1 less than ${Q.prev} is ${Q.ans}` : `1 more than ${Q.prev} is ${Q.ans}`}. ${nums.join(', ')}!${down && nums[len - 1] === 0 ? ' Blast off!' : ''}`);
+    // leave only after a right answer, and never if the child has already moved on
+    const my = run;
+    setTimeout(() => { if (my === run && current === 'seq'){ sfx.whoosh(); $('#train').classList.add(down ? 'blast' : 'go'); } }, 1600);
+    solved('seq', resHTML(rel, '', nums.join(', ')));
   }, () => {
-    guide("Let's count together!");
-    const r = run; setTimeout(() => { if (r === run) seqHelp(); }, 1400);
+    guide("Let's count along the train together!");
+    const rr = run; setTimeout(() => { if (rr === run) seqHelp(); }, 1300);
   });
   const spoken = nums.map((n, i) => i === gap ? 'hmm' : n).join(', ');
-  guide('Which number is <b>missing</b>?', `${down ? "Let's count down" : "Let's count"}: ${spoken}. Which number is missing?`);
+  guide(kind === 'next' ? `${down ? '' : ''}What comes <b>next</b>?` : 'Which number is <b>missing</b>?',
+        `${down ? "Let's count down" : "Let's count"}: ${spoken}. ${kind === 'next' ? 'What comes next?' : 'Which number is missing?'}`);
 }
-// Help: count along the train, carriage by carriage
+// Help: count along the train; at the gap show the bead bar with one more / one less
 async function seqHelp(){
   const my = ++run;
-  for (let i = 0; i < Q.cars.length; i++){
+  for (let i = 0; i < Q.wagons.length; i++){
     if (my !== run) return;
-    const c = Q.cars[i]; c.classList.add('lit');
-    if (i === Q.gap){ c.textContent = Q.ans; c.classList.add('peek'); }
+    const W = Q.wagons[i];
+    W.w.classList.add('lit');
+    if (i === Q.gap){
+      if (Q.beads){
+        W.cargo.classList.add('filled');
+        cargoFor(W.cargo, Q.ans, Q.down ? {ghost: true} : {extra: true});
+      }
+      say(Q.down ? `One less than ${Q.prev} is…` : `One more than ${Q.prev} is…`);
+      await sleep(2200);
+      W.w.classList.remove('lit');
+      break;                                  // stop at the gap: the child finds the number
+    }
     say(String(Q.nums[i])); sfx.pop();
-    await sleep(900);
-    c.classList.remove('lit');
-    if (i === Q.gap && c.classList.contains('gap')){ c.textContent = '?'; c.classList.remove('peek'); }
+    await sleep(850);
+    W.w.classList.remove('lit');
   }
   if (my !== run) return;
-  guide('Did you hear it? Which number was <b>missing</b>?');
+  guide(Q.beads
+    ? (Q.down ? `One bead less than <b>${Q.prev}</b>. Count the beads!` : `One bead more than <b>${Q.prev}</b>. Count the beads!`)
+    : (Q.down ? `What is <b>1 less</b> than <b>${Q.prev}</b>?` : `What is <b>1 more</b> than <b>${Q.prev}</b>?`));
 }
 $('#seqHelp').onclick = seqHelp;
 $('#seqNew').onclick = newSeq;
 $('#seqNext').onclick = newSeq;
 
-/* ================= QUICK LOOK ================= */
+/* ================= QUICK LOOK (subitizing) =================
+   Level 1: 1–5, many arrangements (children of 4–5 can "just see" up to about 5)
+   Level 2: up to 10, only structured patterns (ten-frame, pairs, domino) so the child
+            sees groups, e.g. "5 and 2 make 7" — this builds number bonds (Singapore)
+   Montessori "cards and counters": counters in pairs, the odd one below           */
 let L = null;
-const DICE = {1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8]};
-function lookDots(n, frame){
-  const box = $('#lookDots'); box.innerHTML = '';
-  box.className = frame ? 'frame10' : 'dice';
-  const cells = frame ? 10 : 9;
-  for (let i = 0; i < cells; i++){
-    const c = document.createElement('div'); c.className = 'dotc';
-    const on = frame ? i < n : DICE[n].includes(i);
-    if (on){ const d = document.createElement('i'); d.className = 'dot2' + (frame && i >= 5 ? ' b' : ''); c.appendChild(d); }
-    box.appendChild(c);
+const LOOK_BAG = {nums: [], last: 0, lastType: ''};
+const DICE_P = {1: [[50,50]], 2: [[28,28],[72,72]], 3: [[26,26],[50,50],[74,74]], 4: [[28,28],[72,28],[28,72],[72,72]],
+  5: [[26,26],[74,26],[50,50],[26,74],[74,74]], 6: [[30,22],[30,50],[30,78],[70,22],[70,50],[70,78]]};
+function lookRange(){ const hi = Math.min(S.max, (S.lookLevel || 0) ? 10 : 5); return [1, hi]; }
+// "shuffle bag": every number in the range comes up before any repeats, never twice in a row
+function lookNextNumber(){
+  const [lo, hi] = lookRange();
+  if (!LOOK_BAG.nums.length || LOOK_BAG.hi !== hi){
+    LOOK_BAG.hi = hi;
+    LOOK_BAG.nums = shuffle(Array.from({length: hi - lo + 1}, (_, i) => lo + i));
+    if (LOOK_BAG.nums[LOOK_BAG.nums.length - 1] === LOOK_BAG.last) LOOK_BAG.nums.unshift(LOOK_BAG.nums.pop());
   }
+  return LOOK_BAG.last = LOOK_BAG.nums.pop();
 }
+function lookTypes(n){
+  const t = [];
+  if (n <= 6) t.push('dice');
+  if (n <= 4) t.push('scatter');          // random spots only for very small amounts
+  if (n >= 2) t.push('pairs');
+  if (n >= 2) t.push('domino');
+  t.push('frame');
+  if (n > 5) return t.filter(x => x !== 'dice' || n === 6);
+  return t;
+}
+function lookPick(n){
+  let opts = lookTypes(n).filter(x => x !== LOOK_BAG.lastType);
+  if (!opts.length) opts = lookTypes(n);
+  return LOOK_BAG.lastType = pick(opts);
+}
+const flipX = p => p.map(([x, y]) => [100 - x, y]);
+const turn = p => p.map(([x, y]) => [y, x]);
+function dicePts(n, noTurn){ let p = DICE_P[n]; if (Math.random() < .5) p = flipX(p); if (!noTurn && Math.random() < .5) p = turn(p); return p; }
+function scatterPts(n){
+  for (let tries = 0; tries < 200; tries++){
+    const p = [];
+    for (let i = 0; i < n && p.length === i; i++){
+      for (let k = 0; k < 60; k++){
+        const q = [rnd(18, 82), rnd(18, 82)];
+        if (p.every(([x, y]) => Math.hypot(x - q[0], y - q[1]) > 24)){ p.push(q); break; }
+      }
+    }
+    if (p.length === n) return p;
+  }
+  return dicePts(Math.min(n, 6));
+}
+function lookRender(n, type){
+  const box = $('#lookDots'); box.innerHTML = ''; box.className = 'ldots';
+  const dot = (x, y, c, size) => {
+    const d = document.createElement('span'); d.className = 'ld c' + c; d.dataset.v = 1;
+    d.style.left = x + '%'; d.style.top = y + '%'; if (size) d.style.setProperty('--dsz', size);
+    box.appendChild(d); return d;
+  };
+  const deco = cls => { const e = document.createElement('div'); e.className = cls; box.appendChild(e); return e; };
+  const dots = [];
+  let parts = null;
+  if (type === 'dice') dicePts(n).forEach(([x, y]) => dots.push(dot(x, y, 0)));
+  else if (type === 'scatter') scatterPts(n).forEach(([x, y]) => dots.push(dot(x, y, 0)));
+  else if (type === 'frame'){
+    deco('lframe');
+    for (let i = 0; i < 10; i++){ const c = deco('lcell'); c.style.left = (14 + (i % 5) * 18) + '%'; c.style.top = (i < 5 ? 39 : 61) + '%'; }
+    for (let i = 0; i < n; i++) dots.push(dot(14 + (i % 5) * 18, i < 5 ? 39 : 61, i < 5 ? 1 : 2, '12%'));
+    if (n > 5) parts = [5, n - 5];
+  } else if (type === 'pairs'){
+    const rows = Math.ceil(n / 2), gap = rows > 4 ? 15 : 17, top = 50 - (rows - 1) * gap / 2;
+    for (let i = 0; i < n; i++){
+      const r = Math.floor(i / 2), odd = i === n - 1 && n % 2;
+      dots.push(dot(odd ? 50 : (i % 2 ? 64 : 36), top + r * gap, 0, rows > 4 ? '12%' : '14%'));
+    }
+  } else if (type === 'domino'){
+    const a = rnd(Math.max(1, n - 5), Math.min(5, n - 1)), b = n - a;   // each half 5 or fewer
+    deco('ldomino'); deco('ldivider');
+    dicePts(a, true).forEach(([x, y]) => dots.push(dot(25 + (x - 50) * .5, y, 1, '11%')));
+    dicePts(b, true).forEach(([x, y]) => dots.push(dot(75 + (x - 50) * .5, y, 2, '11%')));
+    parts = [a, b];
+  }
+  return {dots, parts};
+}
+// "How did you see it?" — the owl says how the dots can be seen at a glance
+function lookHow(n, type, parts){
+  if (parts) return {html: `<b>${parts[0]}</b> and <b>${parts[1]}</b> make <b>${n}</b>`, say: `${parts[0]} and ${parts[1]} make ${n}.`, bond: true};
+  if (type === 'frame') return n === 5 ? {html: 'A full row of <b>5</b>!', say: 'A full row of five.'} : n === 10 ? {html: 'A full box is <b>10</b>!', say: 'A full box is ten.'}
+    : {html: `<b>${n}</b> in the top row`, say: `${n} in the top row.`};
+  if (type === 'pairs'){
+    const pr = Math.floor(n / 2), odd = n % 2;
+    if (n === 1) return {html: 'Just <b>1</b>', say: 'Just one.'};
+    return {html: `<b>${pr}</b> pair${pr > 1 ? 's' : ''}${odd ? ' and <b>1</b> more' : ''} make <b>${n}</b>`, say: `${pr} pair${pr > 1 ? 's' : ''}${odd ? ' and one more' : ''} make ${n}.`};
+  }
+  if (type === 'dice'){
+    const t = {1: 'one in the middle', 2: 'two corners', 3: 'three in a line', 4: 'four corners', 5: 'four corners and one in the middle', 6: 'three and three'}[n];
+    return {html: `Like a dice: ${t}`, say: `Like a dice: ${t}.`};
+  }
+  return {html: `You saw <b>${n}</b>!`, say: `You saw ${n}.`};
+}
+function lookLevelText(){
+  const [, hi] = lookRange();
+  $('#lookLevel').innerHTML = `Numbers <b>1 to ${hi}</b>`;
+}
+
 function newLook(){
   stopAll(); resetZone('look');
   $('#lookAskWrap').hidden = true;
-  const top = Math.min(S.max, 10);
-  const n = rnd(top >= 8 ? 3 : 1, top);
-  const frame = n > 6 || (n >= 3 && Math.random() < .3);
-  L = {n, frame, phase: 'ready'};
-  lookDots(n, frame);
+  const n = lookNextNumber(), type = lookPick(n);
+  const {dots, parts} = lookRender(n, type);
+  L = {n, type, dots, parts, phase: 'ready', miss: false, wrong: 0, peeks: 0};
   const cover = $('#lookCover'); cover.classList.remove('open'); cover.innerHTML = '<div class="big">👀</div>Ready?';
   $('#lookTimer').classList.remove('run');
   $('#lookHelp').textContent = '👀 Look!';
+  lookLevelText();
   makeChoices($('#lookChoices'), n, near(n), () => {
-    stopAll();
+    stopAll(); setHint(null);
     const p = pick(PRAISE.look); win('look', p);
     $('#lookCover').classList.add('open');
-    guide(p, `${p} You saw ${n}.`);
-    solved('look', resHTML(`You saw <b>${n}</b> dots!`, frame && n > 5 ? `<div class="res-rep">5 and ${n - 5} make ${n}</div>` : ''));
+    const how = lookHow(n, type, parts);
+    const stageMsg = lookProgress();
+    guide(p, `${p} ${how.say}` + (stageMsg ? ' ' + stageMsg.replace(/[^\w\s!.,]/g, '') : ''));
+    solved('look', resHTML(`You saw <b>${n}</b>!`,
+      `<div class="res-rep">👀 ${how.html}</div>` + (how.bond ? bondHTML(n, parts[0], parts[1]) : '') + (stageMsg ? `<div class="stage-up">${stageMsg}</div>` : '')));
   }, () => {
-    guide("Let's peek again!");
-    const r = run; setTimeout(() => { if (r === run) lookShow(); }, 1200);
+    L.miss = true; L.wrong++;
+    if (L.wrong === 1){
+      guide("Let's peek again!");
+      const r = run; setTimeout(() => { if (r === run) lookShow(); }, 1100);
+    } else {
+      // second try: leave the dots showing and count them together
+      stopAll(); L.phase = 'counting';
+      guide("Let's count them together!");
+      $('#lookCover').classList.add('open'); $('#lookTimer').classList.remove('run');
+      const ctr = makeCountable(L.dots);
+      const r = run; setTimeout(() => { if (r === run) ctr.auto(); }, 900);
+    }
   });
-  guide('Tap <b>Look!</b> The dots hide fast!', 'Get ready! Tap look. The dots will hide very fast. How many will you see?');
+  guide('Tap <b>Look!</b> The dots hide fast!', 'Get ready! Tap look. The dots will hide very fast. Try to see how many without counting!');
   setHint(() => $('#lookHelp'));
 }
 async function lookShow(){
   if (!L || L.phase === 'showing') return;
   const my = ++run; L.phase = 'showing';
-  const ms = L.n > 5 ? 2500 : 2000;
+  if (L.peeks++ > 0) L.miss = true;
+  const ms = L.n > 5 ? 2000 : 1500;          // short, so the child sees instead of counting
   $('#lookCover').classList.add('open');
   const tm = $('#lookTimer'); tm.style.setProperty('--t', ms + 'ms'); tm.classList.remove('run'); void tm.offsetWidth; tm.classList.add('run');
   sfx.chime();
@@ -1720,8 +2209,20 @@ async function lookShow(){
   L.phase = 'ask';
   $('#lookHelp').textContent = '👀 Peek again';
   $('#lookAskWrap').hidden = false;
-  guide('How many dots did you <b>see</b>?');
+  guide('How many did you <b>see</b>?');
   setHint(null);
+}
+// 5 right first-time in a row → up to 10; stuck twice in a row → back to 1–5
+function lookProgress(){
+  let msg = '';
+  if (!L.miss){
+    S.lookMissRun = 0; S.lookStreak = (S.lookStreak || 0) + 1;
+    if (S.lookStreak >= 5 && !S.lookLevel && S.max > 5){ S.lookLevel = 1; S.lookStreak = 0; msg = '🌟 Wow! Next time: numbers up to 10!'; }
+  } else {
+    S.lookStreak = 0; S.lookMissRun = (S.lookMissRun || 0) + 1;
+    if (S.lookMissRun >= 2 && S.lookLevel){ S.lookLevel = 0; S.lookMissRun = 0; msg = '🌱 Next time: small numbers again.'; }
+  }
+  save(); return msg;
 }
 $('#lookHelp').onclick = lookShow;
 $('#lookNew').onclick = newLook;
