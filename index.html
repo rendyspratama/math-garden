@@ -23,6 +23,7 @@
   .t-look{--ac:#C477A8; --ac-m:#EBC3DF; --ac-l:#F8E6F2}
   .t-ten{--ac:#E0913A; --ac-m:#F7CF96; --ac-l:#FDEFD9}
   .t-story{--ac:#7C9A4E; --ac-m:#C9DBA8; --ac-l:#EEF4E2}
+  .t-teen{--ac:#3F86C0; --ac-m:#A9CDEB; --ac-l:#E1EEF9}
 
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   [hidden]{display:none!important}
@@ -335,6 +336,18 @@
   .bk-blocks .items{padding:6px;border-radius:14px;min-width:60px;min-height:50px}
   .bk-blocks .bzA{background:#FDE7D9} .bk-blocks .bzB{background:#DEEEF8}
   .spot{animation:glow 1.6s ease-in-out infinite}
+  .atray.spot{cursor:pointer}
+  /* calmer trays once a part has gone into the basket */
+  .atray .moved{opacity:.12}
+  .atray .moved .badge{display:none}
+  /* make 10: the first box glows "10 ✓" when it is full */
+  .basket .frame{position:relative;transition:box-shadow .3s}
+  .basket .frame.full10{box-shadow:0 0 0 4px #5E9ECB}
+  .basket .frame.full10::after{content:'10 ✓';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#3F86C0;color:#fff;font-size:14px;font-weight:700;padding:1px 10px;border-radius:999px;white-space:nowrap;animation:popIn .4s}
+  .basket .frame.glow10{animation:glow 1.2s ease-in-out 2}
+  .split-note{font-size:14px;font-weight:700;color:#2F6E9B;background:#fff;border:2px solid #A9CDEB;border-radius:999px;padding:1px 10px;margin-top:2px;animation:popIn .4s;white-space:nowrap}
+  .split-note .k{color:#3F86C0}
+  .atray .hand{font-size:34px;right:6px;bottom:6px}
   .basket.spot{border-style:solid;cursor:pointer}
   .dim{opacity:.45}
   @keyframes glow{0%,100%{box-shadow:0 0 0 3px rgba(242,201,92,.95)}50%{box-shadow:0 0 0 9px rgba(242,201,92,.35)}}
@@ -384,7 +397,6 @@
   .demo-ghost{position:fixed;z-index:69;pointer-events:none;display:flex;align-items:center;justify-content:center;opacity:.9}
   .cell.next-slot{box-shadow:inset 0 0 0 3px #F2C95C;animation:slotPulse 1.2s ease-in-out infinite}
   @keyframes slotPulse{50%{box-shadow:inset 0 0 0 5px rgba(242,201,92,.5)}}
-  .atray .hand{font-size:30px;right:-24px;bottom:-22px}
   .tap-tip{text-align:center;font-size:clamp(17px,4.2vw,20px);font-weight:600;color:#9A7420;background:#FCF2D3;border:2px dashed #F2C95C;border-radius:16px;padding:6px 10px;margin:0 0 10px}
 
   .steps{display:flex;justify-content:center;align-items:center;margin:0 0 10px}
@@ -397,6 +409,67 @@
   .stp.done{opacity:1}
   .stp.done::after{content:'✓';position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:50%;background:var(--ok);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
   .stp{position:relative}
+
+  /* ---------- Teens 11–20 ---------- */
+  .tab2{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:20px;background:var(--card);border:3px solid var(--line);font-size:17px;font-weight:600}
+  .tab2 .ti{font-size:28px;line-height:1.1}
+  .tab2.active{background:var(--ac-l);border-color:var(--ac)}
+  .fam-badge{display:block;width:fit-content;max-width:100%;margin:0 auto 6px;font-size:16px;font-weight:700;padding:5px 14px;border-radius:999px;border:2px solid;text-align:center}
+  .fam-ten{background:#E1EEF9;border-color:#A9CDEB;color:#2F6E9B}
+  .fam-easy{background:#E6F5EC;border-color:#A2D6B8;color:#3E7D5E}
+  .fam-hat{background:#FDEFD9;border-color:#F7CF96;color:#A2621C}
+  .fam-special{background:#FCF2D3;border-color:#F2C95C;color:#8C6A12}
+  .fam-twenty{background:#ECE7FA;border-color:#CFC4EE;color:#6E5BA8}
+  .tnumeral{font-size:clamp(84px,22vw,128px);font-weight:700;line-height:1;letter-spacing:2px}
+  .d-t{color:#3F86C0} .d-o{color:#4E9B73}
+  .tnumeral .d-t,.tnumeral .d-o,.live .d-t,.live .d-o{display:inline-block;border-radius:18px;padding:0 6px;transition:background .3s,box-shadow .3s}
+  .hl{background:#FFF0C2!important;box-shadow:0 0 0 4px #F2C95C!important}
+  .tframes{display:flex;justify-content:center;gap:6px;flex-wrap:nowrap;margin:8px 0 4px}
+  .tfw{display:flex;flex-direction:column;align-items:center;gap:4px;border-radius:16px;padding:4px;transition:background .3s,box-shadow .3s}
+  .tfw .frame{padding:5px;gap:4px}
+  .tfw .cell{width:clamp(21px,5.6vw,34px)}
+  .tfw .frame{gap:3px;padding:4px;border-width:2px}
+  .tframes.small .cell{width:clamp(16px,4.2vw,24px)}
+  .tdot{display:block;width:74%;aspect-ratio:1;border-radius:50%;transition:background .3s}
+  .tdot.t{background:#5E9ECB} .tdot.o{background:#5DA682}
+  .tdot.pop{animation:pop .35s}
+  .tf-lab{font-size:15px;font-weight:700} .tf-lab.t{color:#3F86C0} .tf-lab.o{color:#4E9B73}
+  .ten-and{text-align:center;font-size:clamp(21px,5.4vw,27px);font-weight:700;margin:6px 0;color:var(--muted)}
+  .ten-and .t{color:#3F86C0} .ten-and .o{color:#4E9B73}
+  .wbuild{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:6px;margin:8px 0;font-size:clamp(19px,4.8vw,25px);font-weight:700;color:var(--muted)}
+  .wc{padding:3px 11px;border-radius:14px;border:3px solid;transition:transform .25s,box-shadow .25s}
+  .wc.o{background:#E6F5EC;border-color:#A2D6B8;color:#3E7D5E}
+  .wc.t{background:#E1EEF9;border-color:#A9CDEB;color:#2F6E9B}
+  .wc.was{text-decoration:line-through;opacity:.6}
+  .wc.lit{transform:scale(1.15);box-shadow:0 0 0 4px #F2C95C}
+  .wfull{padding:3px 12px;border-radius:14px;background:#fff;border:3px dashed var(--line);color:var(--ink);transition:transform .25s,border-color .25s}
+  .wfull.lit{border-style:solid;border-color:#F2C95C;transform:scale(1.12)}
+  .wfull .o,.lword .o{color:#4E9B73} .wfull .t,.lword .t{color:#3F86C0}
+  .flip{text-align:center;font-size:16px;color:var(--muted);background:#F8F2E6;border-radius:14px;padding:6px 12px;margin:8px auto 0;width:fit-content;max-width:100%}
+  .flip b{color:var(--ink)}
+  .te-id{text-align:center;font-size:clamp(18px,4.6vw,22px);font-weight:700;margin-top:10px;padding-top:10px;border-top:2px dashed var(--line)}
+  .te-id .o{color:#4E9B73} .te-id .t{color:#3F86C0}
+  .te-id small{display:block;font-size:14px;font-weight:600;color:var(--muted);margin-top:2px}
+  .fam-row{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+  .fam-row{flex-wrap:nowrap}
+  .fam-row .fl{font-size:14px;font-weight:700;min-width:78px;flex-shrink:0}
+  .tbtn{width:clamp(38px,10.5vw,50px);height:48px;border-radius:14px;font-size:clamp(17px,4.6vw,21px);flex-shrink:0;font-weight:700;box-shadow:0 3px 0 rgba(0,0,0,.1);background:#fff;border:2px solid var(--line)}
+  .tbtn.active{background:var(--ac);color:#fff;border-color:var(--ac)}
+  .listen-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 12px}
+  .hear{width:86px;height:86px;border-radius:50%;background:var(--ac-l);font-size:40px;box-shadow:0 5px 0 var(--ac-m)}
+  .hear:active{transform:translateY(4px);box-shadow:0 1px 0 var(--ac-m)}
+  .hear.small{width:46px;height:46px;font-size:22px;box-shadow:0 3px 0 var(--ac-m);vertical-align:middle}
+  .lword{font-size:clamp(36px,9.5vw,50px);font-weight:700;text-align:center;line-height:1.1}
+  .btarget{text-align:center;font-size:clamp(22px,6vw,30px);font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+  .btarget b{color:var(--ac);font-size:1.25em}
+  .tframes.build .tfw.addable .cell{cursor:pointer}
+  .tframes.build .tfw.addable .cell:empty{border:2px dashed #A2D6B8}
+  .tframes.build .tfw.addable .cell.next{box-shadow:inset 0 0 0 3px #F2C95C;animation:slotPulse 1.2s ease-in-out infinite}
+  .live{text-align:center;font-size:clamp(46px,12vw,66px);font-weight:700;line-height:1.05;margin-top:6px}
+  .live small{display:block;font-size:clamp(18px,4.6vw,22px);color:var(--muted);font-weight:600}
+  .te-small{font-size:16px;padding:8px 14px;min-height:50px}
+  .btn-done{--bgc:var(--ok-m);--sh:var(--ok)}
+  .rnum{font-size:1.4em}
 
   /* ---------- Home sections ---------- */
   .sec-title{font-size:21px;margin:4px 4px 10px;display:flex;align-items:center;gap:8px}
@@ -676,6 +749,7 @@
       <button class="mcard t-cmp" data-go="cmp"><div class="mc-sym emo">🐊</div><div class="label">More or Less</div></button>
       <button class="mcard t-seq" data-go="seq"><div class="mc-sym emo">🚂</div><div class="label">What's Next</div></button>
       <button class="mcard t-look" data-go="look"><div class="mc-sym emo">👀</div><div class="label">Quick Look</div></button>
+      <button class="mcard wide t-teen" data-go="teens"><div class="mc-sym txt">11+</div><div class="mc-text"><div class="label">Teens 11–20</div><div class="art">🔟 + ●●● = 13</div></div></button>
     </div>
     <h2 class="sec-title">🧮 Math</h2>
     <div class="menu">
@@ -908,6 +982,60 @@
       <button class="btn btn-next" id="storyNext" hidden>Next ▶</button>
     </div>
   </section>
+  <!-- ================= TEENS 11–20 ================= -->
+  <section id="teens" class="screen">
+    <div class="tabs">
+      <button class="tab2 active" data-tmode="learn"><span class="ti">👀</span>Learn</button>
+      <button class="tab2" data-tmode="listen"><span class="ti">👂</span>Which one?</button>
+      <button class="tab2" data-tmode="build"><span class="ti">🧱</span>Build it</button>
+    </div>
+
+    <div id="teLearn">
+      <div class="card">
+        <div class="fam-badge" id="teFam"></div>
+        <div class="num-hero">
+          <button class="arrow" id="tePrev" aria-label="Previous">◀</button>
+          <div class="big-wrap" id="teBigWrap"><div class="tnumeral" id="teNum"></div></div>
+          <button class="arrow" id="teNext" aria-label="Next">▶</button>
+        </div>
+        <div class="tframes" id="teFrames"></div>
+        <div class="ten-and" id="teAnd"></div>
+        <div class="wbuild" id="teWord"></div>
+        <div class="flip" id="teFlip"></div>
+        <div class="te-id" id="teID" hidden></div>
+      </div>
+      <div class="footer">
+        <button class="btn btn-help" id="teSay">🔊 Say it with me</button>
+        <button class="btn btn-new te-small" id="teCount">🎵 Count 10→20</button>
+        <button class="btn btn-new te-small" id="teIDBtn">🇮🇩 Bahasa</button>
+      </div>
+      <div class="card"><p class="grid-title">Teen families</p><div id="teGrid"></div></div>
+    </div>
+
+    <div id="teListen" hidden>
+      <div class="card listen-card">
+        <button class="hear" id="teHear" aria-label="Hear it again">🔊</button>
+        <div class="lword" id="teLWord"></div>
+      </div>
+      <div id="teLAsk"><div class="ask">Which number is it? 👇</div><div class="choices" id="teLChoices"></div></div>
+      <div class="result" id="teLResult" hidden></div>
+      <div class="footer"><button class="btn btn-next" id="teLNext" hidden>Next ▶</button></div>
+    </div>
+
+    <div id="teBuild" hidden>
+      <div class="card">
+        <div class="btarget">Make <b id="teBWord"></b> <button class="hear small" id="teBHear" aria-label="Hear it">🔊</button></div>
+        <div class="tframes build" id="teBFrames"></div>
+        <div class="live" id="teBLive"></div>
+      </div>
+      <div class="result" id="teBResult" hidden></div>
+      <div class="footer">
+        <button class="btn btn-help" id="teBHelp">💡 Help</button>
+        <button class="btn btn-done" id="teBDone">✓ Done</button>
+        <button class="btn btn-next" id="teBNext" hidden>Next ▶</button>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- Grown-up settings -->
@@ -946,10 +1074,11 @@
       <summary>📘 How Math Garden teaches</summary>
       <ul>
         <li><b>Concrete → Pictorial → Abstract</b> (Singapore Math): tap and count pictures first, then a number bond, then the number sentence.</li>
-        <li><b>Number bonds:</b> “two parts make the whole” (3 and 2 make 5). In Add, the bond fills in as your child counts.</li>
+        <li><b>Number bonds:</b> “two parts make the whole” (3 and 2 make 5). In Add, the bond fills in as your child counts. When a sum goes past 10, Add shows <b>make 10</b>: 9 + 3 → 9 + 1 fills the box (10), then 2 more → 12.</li>
         <li><b>Pictures → dots → numbers:</b> on Auto, Add moves on after 3 right answers in a row, and goes back a step if your child gets stuck twice.</li>
         <li><b>Ten-frames &amp; making ten:</b> teen numbers are “10 and some more”. Make 10 starts with Make 5, uses an egg box, bus or car park, and asks your child to count the <b>empty spaces</b>. If your child is stuck, Ollie shows it on fingers: the fingers down are the missing ones.</li>
         <li><b>Montessori colours:</b> green squares are ones, blue bars are tens.</li>
+        <li><b>Teens 11–20:</b> taught as “ten and four → four·teen”. Families in order: easy teens (14, 16–19), hat teens (13 thir-, 15 fif-), special names (11, 12), then 20. Digits are coloured blue (ten) and green (ones) to stop 14 being written as 41. Optional 🇮🇩 Bahasa line: <i>empat belas</i> = four + teen.</li>
         <li><b>Three-period lesson:</b> Learn (“This is 7”) → Find it (“Show me 7”) → How many?</li>
         <li><b>× is equal groups</b> (3 × 2 = 2 + 2 + 2). <b>÷ is fair sharing</b>, one at a time. At most 5 groups or friends.</li>
         <li>Mistakes are never called wrong: the owl checks together with your child.</li>
@@ -1011,14 +1140,15 @@ const PRAISE = {
   seq: ['You know the order!', 'Choo choo! You got it!'],
   look: ['Sharp eyes!', 'You saw it so fast!'],
   ten: ['You filled it up!', 'You made it!', 'Full! Well counted!'],
-  story: ['You solved the story!', 'You acted it out!']
+  story: ['You solved the story!', 'You acted it out!'],
+  teens: ['You know your teens!', 'You built it!', 'Great listening!']
 };
 const nm = (t, n) => n === 1 ? t.one : t.many;
 
 /* ================= Saved state ================= */
 const S = {max: 10, stars: 0, stickers: [], prog: {}, rewards: true, ops: true, tipSeen: false, addMode: 'auto', addLevel: 0, addStreak: 0, addMissRun: 0, lookLevel: 0, lookStreak: 0, lookMissRun: 0, tenLevel: 0, tenStreak: 0, tenMissRun: 0, tenFound: {}};
 try{ Object.assign(S, JSON.parse(localStorage.getItem('mathGarden3') || '{}')); }catch(e){}
-['numbers','add','sub','mul','div','cmp','seq','look','ten','story'].forEach(k => { if (typeof S.prog[k] !== 'number') S.prog[k] = 0; });
+['numbers','add','sub','mul','div','cmp','seq','look','ten','story','teens'].forEach(k => { if (typeof S.prog[k] !== 'number') S.prog[k] = 0; });
 S.max = Math.min(100, Math.max(5, S.max || 10));
 function save(){ try{ localStorage.setItem('mathGarden3', JSON.stringify(S)); }catch(e){} }
 
@@ -1204,6 +1334,7 @@ $('#resetBtn').onclick = () => {
 function applyHome(){
   $('#stars').hidden = current !== 'home' || !S.rewards;
   $$('[data-go="mul"],[data-go="div"]').forEach(c => c.hidden = !S.ops);
+  $('[data-go="teens"]').hidden = S.max < 20;   // teens only once numbers go up to 20
   stickersRender();
 }
 // first-time bubble pointing at ⚙️
@@ -1309,14 +1440,14 @@ function makeCountable(items, {onCount, attach = true} = {}){
       if (onCount) onCount(total);
     },
     firstLeft: () => items.find(el => !skip(el)),
-    async auto(){
+    async auto(ms = 800){
       st.reset();
       const my = ++run;
       for (const el of items){
         if (my !== run) return;
         if (skip(el)) continue;
         st.mark(el);
-        await sleep(+el.dataset.v > 1 ? 1000 : 800);
+        await sleep(+el.dataset.v > 1 ? ms + 200 : ms);
       }
     }
   };
@@ -1387,7 +1518,8 @@ const SCREENS = {
   seq:     {title: "What's Next", sym: '🚂', theme: 't-seq'},
   look:    {title: 'Quick Look', sym: '👀', theme: 't-look'},
   ten:     {title: 'Make 10', sym: '🔟', theme: 't-ten'},
-  story:   {title: 'Stories', sym: '📖', theme: 't-story'}
+  story:   {title: 'Stories', sym: '📖', theme: 't-story'},
+  teens:   {title: 'Teens 11–20', sym: '11+', theme: 't-teen'}
 };
 function go(id){
   stopAll(); setHint(null);
@@ -1400,14 +1532,14 @@ function go(id){
   $('#stars').hidden = !home || !S.rewards;
   if (!home){
     $('#titleSym').textContent = cfg.sym;
-    $('#titleSym').classList.toggle('txt', cfg.sym === '123');
+    $('#titleSym').classList.toggle('txt', cfg.sym === '123' || cfg.sym === '11+');
     $('#titleText').textContent = cfg.title;
   }
   flowersRender();
   window.scrollTo({top: 0});
   $('#gearTip').hidden = !home || S.tipSeen;
   if (home){ applyHome(); guide("Hi! I'm <b>Ollie</b>. What shall we play?", "Hi friend! I'm Ollie the owl. What shall we play today?"); return; }
-  ({numbers: numbersEnter, add: newAdd, sub: newSub, mul: newMul, div: newDiv, cmp: newCmp, seq: newSeq, look: newLook, ten: newTen, story: newStory})[id]();
+  ({numbers: numbersEnter, add: newAdd, sub: newSub, mul: newMul, div: newDiv, cmp: newCmp, seq: newSeq, look: newLook, ten: newTen, story: newStory, teens: teensEnter})[id]();
 }
 $('#homeBtn').onclick = () => go('home');
 $$('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
@@ -1565,7 +1697,8 @@ function setupAdd(a, b, stage, missed){
   const s = a + b;
   const blocks = s > 20 && stage < 2;
   const P = blocks ? BLOCK_PAIR : stage === 1 ? DOT_PAIR : stage === 0 ? pick(ADD_PAIRS) : DOT_PAIR;
-  A = {a, b, s, P, blocks, stage, step: 0, moved: 0, miss: missed};
+  A = {a, b, s, P, blocks, stage, step: 0, moved: 0, miss: missed, makeTen: false, fill: 0};
+  $$('#trayB .split-note').forEach(e => e.remove());
   const card = $('#addCard');
   card.classList.toggle('abstract', stage === 2);
   $('#addSteps').hidden = stage === 2;
@@ -1602,10 +1735,12 @@ function setupAdd(a, b, stage, missed){
     // as soon as a part is counted, it goes into the basket (the whole)
     A.ctrA = makeCountable(A.ia, {attach: false, onCount: c => { if (c === a) setTimeout(() => addGroupIn('a'), 700); }});
     A.ctrB = makeCountable(A.ib, {attach: false, onCount: c => { if (c === b) setTimeout(() => addGroupIn('b'), 700); }});
-    A.ia.forEach(el => el.onclick = () => addTap(el, 'a'));
-    A.ib.forEach(el => el.onclick = () => addTap(el, 'b'));
+    // one tap on a tray: Ollie counts that part out loud, one by one, then it goes into the basket
+    $('#trayA').onclick = () => addTap('a');
+    $('#trayB').onclick = () => addTap('b');
   }
-  $('#basket').onclick = null;
+  $('#basket').onclick = () => { if (A && A.step === 3 && !A.busy && !$('#addChoices').dataset.done) addCountOn(); };
+  if (stage === 2){ $('#trayA').onclick = $('#trayB').onclick = null; }
 
   makeChoices($('#addChoices'), s, near(s), () => {
     stopAll(); setHint(null);
@@ -1617,7 +1752,9 @@ function setupAdd(a, b, stage, missed){
     const stageMsg = addProgress();
     const big = Math.max(a, b), small = Math.min(a, b);
     // Singapore "count on": start from the bigger part
-    const countOn = !blocks && small <= 3 && big >= 3
+    const countOn = A.makeTen
+      ? `<div class="res-rep">🔟 Make 10: ${a} + <b>${A.fill}</b> = 10, then <b>${s - 10}</b> more → ${s}</div>`
+      : !blocks && small <= 3 && big >= 3
       ? `<div class="res-rep">🐸 Quick way: start at <b>${big}</b>, count on: ${Array.from({length: small}, (_, i) => big + i + 1).join(', ')}</div>` : '';
     guide(p, `${p} ${a} and ${b} make ${s}. ${a} plus ${b} equals ${s}!` + (stageMsg ? ' ' + stageMsg.replace(/[^\w\s!.,]/g, '') : ''));
     const line = stage === 2 ? `<b>${a}</b> and <b>${b}</b> make <b>${s}</b>` : `<b>${a}</b> ${aName(a)} and <b>${b}</b> ${bName(b)} make <b>${s}</b> ${P.all}`;
@@ -1673,12 +1810,12 @@ function addStep(n){
   A.step = n; addSpot(n);
   const {a, b, s, P} = A;
   if (n === 1){
-    guide(`<b>${a}</b> ${aName(a)} and <b>${b}</b> ${bName(b)}. Count the <b>${aName(2)}</b>!`,
-          `Here are ${a} ${aName(a)} and ${b} ${bName(b)}. First, count the ${aName(2)}. Tap each one!`);
-    setHint(() => A.ctrA.firstLeft());
+    guide(`<b>${cap(aName(a))}</b> and <b>${bName(b)}</b>. Tap the <b>${aName(a)}</b> to count!`,
+          `Here are some ${aName(a)} and ${bName(b)}. Tap the ${aName(a)}, and let's count together!`);
+    setHint(() => $('#trayA'), 2500);
   } else if (n === 2){
-    guide(`Now count the <b>${bName(2)}</b>!`, `Now count the ${bName(2)}. Tap each one!`);
-    setHint(() => A.ctrB.firstLeft());
+    guide(`Now tap the <b>${bName(b)}</b>!`, `Now tap the ${bName(b)}, and let's count!`);
+    setHint(() => $('#trayB'), 2500);
   } else if (n === 3){
     A.baskA = A.cells ? A.cells.slice(0, a).map(c => c.querySelector('.obj')).filter(Boolean) : [...$$('#addGR .bzA > *')];
     A.baskB = A.cells ? A.cells.slice(a, s).map(c => c.querySelector('.obj')).filter(Boolean) : [...$$('#addGR .bzB > *')];
@@ -1686,17 +1823,26 @@ function addStep(n){
       if (c === s && !$('#addChoices').dataset.done) setTimeout(() => guide(!A.blocks && s > 10
         ? `<b>10</b> and <b>${s - 10}</b> more make <b>${s}</b>! Tap <b>${s}</b>.` : `You counted <b>${s}</b>! Tap <b>${s}</b> below.`), 800);
     }});
-    guide(`All together! How many <b>${P.all}</b> now?`,
-          `${a} and ${b} are together in the basket. How many ${P.all} are there now? Count them, then tap the number!`);
+    if (A.makeTen) guide(`A full box is <b>10</b>, and <b>${s - 10}</b> more. How many?`,
+          `One full box is ten, and ${s - 10} more. How many is that? Tap the number, or tap the basket for help!`);
+    else guide(`All together! How many <b>${P.all}</b>? Tap the basket to count on 🧺`,
+          `${a} and ${b} are together in the basket. How many ${P.all} are there now? Tap the number, or tap the basket to count on!`);
     $('#addAskWrap').hidden = false;
-    setHint(() => A.ctrAll.firstLeft());
+    setHint(() => $('#basket'), 4000);
   }
 }
 
-function addTap(el, g){
-  if (!A || A.busy) return;
-  if (A.step === 1){ if (g === 'a') A.ctrA.mark(el); else guide(`First, count the <b>${aName(2)}</b>!`); }
-  else if (A.step === 2){ if (g === 'b') A.ctrB.mark(el); else guide(`Now count the <b>${bName(2)}</b>!`); }
+function addTap(g){
+  if (!A || A.busy || A.counting) return;
+  if (A.step === 1){ if (g === 'a') addCountPart('a'); else guide(`First, tap the <b>${aName(2)}</b>!`); }
+  else if (A.step === 2){ if (g === 'b') addCountPart('b'); else guide(`Now tap the <b>${bName(2)}</b>!`); }
+}
+// count one part with the child: each item lights up with its number while Ollie says it
+async function addCountPart(g){
+  A.counting = true; setHint(null);
+  const n = g === 'a' ? A.a : A.b;
+  await (g === 'a' ? A.ctrA : A.ctrB).auto(n > 10 ? 450 : 650);
+  A.counting = false;
 }
 
 // one counted part moves, piece by piece, into its own coloured spaces in the basket
@@ -1709,10 +1855,12 @@ async function addGroupIn(g){
   fillIn(g === 'a' ? '#addA' : '#addB', n); fillIn(g === 'a' ? '#eqA' : '#eqB', n);   // the part of the bond fills in
   $('#basket').classList.remove('dim');
   $('#addLines').classList.add('flow');
+  // Singapore "make 10": when the second part goes past 10, fill the first box, stop, then the rest
+  const makeTen = g === 'b' && A.cells && A.a < 10 && A.s > 10;
+  const fill = makeTen ? 10 - A.a : 0;
   guide(`<b>${n}</b> ${name}! Into the basket 🧺`, `${n} ${name}! Into the basket they go.`);
   await sleep(1200);
-  for (let i = 0; i < items.length; i++){
-    if (my !== run){ A.busy = false; return; }
+  const fly = async (i) => {
     const el = items[i];
     el.classList.add('moved');
     const c = freshCopy(el); c.style.visibility = 'hidden'; c.onclick = null;
@@ -1721,9 +1869,29 @@ async function addGroupIn(g){
     sfx.whoosh();
     flyTo(el, c, 450).then(() => { c.style.visibility = 'visible'; bounce(c); });
     await sleep(items.length > 10 ? 130 : 240);
+  };
+  for (let i = 0; i < items.length; i++){
+    if (my !== run){ A.busy = false; return; }
+    await fly(i);
+    if (makeTen && i === fill - 1){
+      // the first box is now full: show it and say it
+      await sleep(550);
+      if (my !== run){ A.busy = false; return; }
+      const f1 = $('#addGR .frame'); f1.classList.add('full10', 'glow10');
+      sfx.chime();
+      guide(`<b>${fill}</b> more fills the box: <b>10</b>! 🔟`, `${fill} more fills the box. Ten!`);
+      await sleep(2300);
+      if (my !== run){ A.busy = false; return; }
+      if (n - fill > 0){ guide(`…and <b>${n - fill}</b> more!`, `and ${n - fill} more.`); await sleep(900); }
+    }
   }
   await sleep(750);
   $('#addLines').classList.remove('flow');
+  if (makeTen){
+    // show how the second part was split: 3 = 1 + 2
+    $('#trayB').insertAdjacentHTML('beforeend', `<div class="split-note">${n} = <span class="k">${fill}</span> + ${n - fill}</div>`);
+  }
+  A.makeTen = makeTen; A.fill = fill;
   A.busy = false;
   if (my !== run) return;
   addStep(g === 'a' ? 2 : 3);
@@ -1732,6 +1900,7 @@ async function addGroupIn(g){
 // Singapore "count on": we already know the first part, so start there and count the rest
 async function addCountOn(){
   if (!A || !A.ctrAll) return;
+  if (A.makeTen) return addTenOn();
   const my = ++run;
   A.ctrAll.reset();
   let tot = 0;
@@ -1749,11 +1918,33 @@ async function addCountOn(){
   guide(`Start at <b>${A.a}</b>, count on to <b>${tot}</b>! Tap <b>${tot}</b>.`);
 }
 
+// make-10 help: the full box is 10 at a glance, then count on: eleven, twelve…
+async function addTenOn(){
+  const my = ++run;
+  A.ctrAll.reset();
+  const all = [...A.baskA, ...A.baskB];
+  const f1 = $('#addGR .frame'); f1.classList.remove('glow10'); void f1.offsetWidth; f1.classList.add('glow10');
+  all.slice(0, 10).forEach(el => el.classList.add('counted'));
+  setBadge(all[9], 10);
+  sfx.chime();
+  guide('A full box is <b>10</b>. Count on! 👆', "A full box is ten. We don't need to count it. Ten. Now count on!");
+  await sleep(3000);
+  let tot = 10;
+  for (const el of all.slice(10)){
+    if (my !== run) return;
+    tot += 1; el.classList.add('counted'); setBadge(el, tot); bounce(el);
+    sfx.pop(); say(numWord(tot));
+    await sleep(900);
+  }
+  if (my !== run) return;
+  guide(`Ten and <b>${tot - 10}</b> more make <b>${tot}</b>! Tap <b>${tot}</b>.`);
+}
 // Help does the current step with the child
 $('#addHelp').onclick = () => {
   if (!A || A.busy) return;
   if (A.stage === 2){ guide("Let's use dots to help!"); const {a, b} = A; setTimeout(() => setupAdd(a, b, 1, true), 900); return; }
-  ({1: () => A.ctrA.auto(), 2: () => A.ctrB.auto(), 3: addCountOn})[A.step]?.();
+  if (A.counting) return;
+  ({1: () => addCountPart('a'), 2: () => addCountPart('b'), 3: addCountOn})[A.step]?.();
 };
 $('#addNew').onclick = newAdd;
 $('#addNext').onclick = newAdd;
@@ -2740,6 +2931,281 @@ async function storyHelp(){
 $('#storyHelp').onclick = storyHelp;
 $('#storyNew').onclick = newStory;
 $('#storyNext').onclick = newStory;
+
+/* ================= TEENS 11–20 =================
+   Singapore: a teen is "ten and some more" (14 = ten and four), counting on from ten.
+   English names in families, easiest first: easy (four + teen), hat (three → thir, five → fif),
+   special names (eleven, twelve), then twenty = two tens.
+   Colour link everywhere: tens blue, ones green (Montessori), so the written 1 is the full box
+   and the 4 is the extra ones: we SAY four first, but WRITE 1 first.
+   Three-period lesson: Learn ("this is fourteen") → Which one? ("show me fourteen") → Build it.  */
+const ID_ONES = ['nol','satu','dua','tiga','empat','lima','enam','tujuh','delapan','sembilan'];
+const TEEN_ORDER = [10, 14, 16, 17, 18, 19, 13, 15, 11, 12, 20];
+const TEEN_FAMS = [
+  {key: 'ten', label: '🔟 Start', nums: [10]},
+  {key: 'easy', label: '✅ Easy', nums: [14, 16, 17, 18, 19]},
+  {key: 'hat', label: '🎩 Hat', nums: [13, 15]},
+  {key: 'special', label: '⭐ Special', nums: [11, 12]},
+  {key: 'twenty', label: '🎉 Twenty', nums: [20]}
+];
+const HAT = {13: 'thir', 15: 'fif'};
+const FAM_BADGE = {ten: '🔟 Start here: ten is a full box', easy: '✅ Easy teen: number + teen', hat: '🎩 Hat teen: the number changes a little',
+  special: '⭐ Special name: learn it by heart', twenty: '🎉 Two tens'};
+const teenFam = n => n === 10 ? 'ten' : n === 20 ? 'twenty' : (n === 11 || n === 12) ? 'special' : HAT[n] ? 'hat' : 'easy';
+const teenStem = n => HAT[n] || (n === 18 ? 'eigh' : ONES[n % 10]);
+const idWord = n => n === 10 ? 'sepuluh' : n === 11 ? 'sebelas' : n === 20 ? 'dua puluh' : ID_ONES[n - 10] + ' belas';
+const teenDigits = n => { const d = String(n); return `<span class="d-t">${d[0]}</span><span class="d-o">${d[1]}</span>`; };
+function teenWordColored(n){
+  const f = teenFam(n);
+  return (f === 'easy' || f === 'hat') ? `<span class="o">${teenStem(n)}</span><span class="t">teen</span>` : numWord(n);
+}
+function teenAndHTML(n){
+  if (n === 10) return 'a full box is <span class="t">ten</span>';
+  if (n === 20) return '<span class="t">ten</span> and <span class="t">ten</span>';
+  return `<span class="t">ten</span> and <span class="o">${ONES[n - 10]}</span>`;
+}
+function teenFramesHTML(n){
+  const frame = (count, cls) => `<div class="frame">${Array.from({length: 10}, (_, i) => `<div class="cell">${i < count ? `<i class="tdot ${cls}"></i>` : ''}</div>`).join('')}</div>`;
+  let h = `<div class="tfw" data-part="t">${frame(10, 't')}<div class="tf-lab t">10 · ten</div></div>`;
+  if (n === 20) h += `<div class="tfw" data-part="o">${frame(10, 't')}<div class="tf-lab t">10 · ten</div></div>`;
+  else if (n > 10) h += `<div class="tfw" data-part="o">${frame(n - 10, 'o')}<div class="tf-lab o">${n - 10} · ${ONES[n - 10]}</div></div>`;
+  return h;
+}
+function teenWordHTML(n){
+  const f = teenFam(n), o = ONES[n % 10];
+  if (f === 'ten') return `<span class="wfull" data-w="full">ten</span>`;
+  if (f === 'easy') return `<span class="wc o" data-w="o">${o}</span>+<span class="wc t" data-w="t">teen</span>=<span class="wfull" data-w="full">${teenWordColored(n)}</span>`;
+  if (f === 'hat') return `<span class="wc o was" data-w="was">${o}</span>→<span class="wc o" data-w="o">${HAT[n]} 🎩</span>+<span class="wc t" data-w="t">teen</span>=<span class="wfull" data-w="full">${teenWordColored(n)}</span>`;
+  if (f === 'special') return `<span class="wc t" data-w="t">ten</span>and<span class="wc o" data-w="o">${o}</span>→<span class="wfull" data-w="full">${numWord(n)} ⭐</span>`;
+  return `<span class="wc t" data-w="t">two tens</span>→<span class="wfull" data-w="full">twenty 🎉</span>`;
+}
+function teenFlipHTML(n){
+  const f = teenFam(n);
+  if (f === 'ten') return '🔟 Every teen starts with a <b>full box of ten</b>!';
+  if (f === 'twenty') return 'Two full boxes make <b>twenty</b>.';
+  if (f === 'special') return `⭐ A special name. Say it with Ollie: <b>${numWord(n)}</b>!`;
+  return `👂 We <b>say</b> “${teenStem(n)}” first · ✍️ we <b>write</b> <span class="d-t">1</span> first`;
+}
+function teenIDHTML(n){
+  if (n === 10) return '🇮🇩 <span class="t">sepuluh</span>';
+  if (n === 11) return '🇮🇩 <span class="o">se</span><span class="t">belas</span><small>belas = teen</small>';
+  if (n === 20) return '🇮🇩 <span class="o">dua</span> <span class="t">puluh</span><small>puluh = tens</small>';
+  return `🇮🇩 <span class="o">${ID_ONES[n - 10]}</span> <span class="t">belas</span><small>${ID_ONES[n - 10]} + belas, just like ${ONES[n - 10]} + teen</small>`;
+}
+let idVoice = null;
+function sayID(text){
+  if (!soundOn || !('speechSynthesis' in window)) return;
+  idVoice = idVoice || speechSynthesis.getVoices().find(v => /^id/i.test(v.lang)) || null;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text); u.lang = 'id-ID'; if (idVoice) u.voice = idVoice; u.rate = .85;
+  speechSynthesis.speak(u);
+}
+
+let teN = 10;
+function setTeenMode(m){
+  $$('.tab2').forEach(t => t.classList.toggle('active', t.dataset.tmode === m));
+  $('#teLearn').hidden = m !== 'learn'; $('#teListen').hidden = m !== 'listen'; $('#teBuild').hidden = m !== 'build';
+}
+$$('.tab2').forEach(t => t.onclick = () => {
+  stopAll(); setHint(null); setTeenMode(t.dataset.tmode);
+  ({learn: () => teShow(teN), listen: newTeenListen, build: newTeenBuild})[t.dataset.tmode]();
+});
+function teensEnter(){ teGrid(); setTeenMode('learn'); teShow(teN); }
+function teGrid(){
+  $('#teGrid').innerHTML = TEEN_FAMS.map(f => `<div class="fam-row"><span class="fl">${f.label}</span>${f.nums.map(n => `<button class="tbtn" data-n="${n}">${n}</button>`).join('')}</div>`).join('');
+  $$('#teGrid .tbtn').forEach(b => b.onclick = () => { stopAll(); teShow(+b.dataset.n); window.scrollTo({top: 0, behavior: 'smooth'}); });
+}
+
+/* ---------- Learn ---------- */
+function teShow(n, auto = true){
+  teN = n;
+  const f = teenFam(n);
+  const badge = $('#teFam'); badge.className = 'fam-badge fam-' + f; badge.textContent = FAM_BADGE[f];
+  const num = $('#teNum'); num.innerHTML = teenDigits(n); bounce(num);
+  $('#teFrames').innerHTML = teenFramesHTML(n);
+  $('#teAnd').innerHTML = teenAndHTML(n);
+  $('#teWord').innerHTML = teenWordHTML(n);
+  $('#teFlip').innerHTML = teenFlipHTML(n);
+  $('#teID').innerHTML = teenIDHTML(n); $('#teID').hidden = !S.teenID;
+  $('#teIDBtn').textContent = S.teenID ? '🇮🇩 Bahasa ✓' : '🇮🇩 Bahasa';
+  $$('#teGrid .tbtn').forEach(b => b.classList.toggle('active', +b.dataset.n === n));
+  const o = ONES[n % 10];
+  const msg = {
+    ten: ['A full box is <b>10</b>. Every teen starts here!', 'This is ten. A full box. Every teen number starts with a full box of ten!'],
+    easy: [`<b>${n}</b> is ten and ${o}: <b>${o}</b>·teen!`, `${n} is ten and ${o}. ${o}, teen. ${numWord(n)}!`],
+    hat: [`<b>${n}</b> is ten and ${o}. ${cap(o)} wears a hat: <b>${HAT[n]}</b>·teen!`, `${n} is ten and ${o}. ${o} wears a hat and becomes ${HAT[n]}. ${numWord(n)}!`],
+    special: [`<b>${n}</b> is ten and ${o}. Its special name is <b>${numWord(n)}</b>!`, `${n} is ten and ${o}. It has a special name: ${numWord(n)}!`],
+    twenty: ['<b>20</b> is two full boxes: <b>twenty</b>!', 'Two full boxes of ten make twenty!']
+  }[f];
+  guide(msg[0], false);
+  if (auto){ const r = run; setTimeout(() => { if (r === run) teSayIt(n); }, 500); }
+}
+// light each part as Ollie says it: ten → and four → four · teen → fourteen
+async function teSayIt(n){
+  const my = ++run;
+  const root = $('#teLearn');
+  const hl = (sel, on) => root.querySelectorAll(sel).forEach(e => e.classList.toggle('hl', on));
+  const lit = (w, on) => root.querySelectorAll(`[data-w="${w}"]`).forEach(e => e.classList.toggle('lit', on));
+  const beat = async (fn, text, ms) => { if (my !== run) return false; fn(true); say(text); await sleep(ms); fn(false); return my === run; };
+  const f = teenFam(n), o = ONES[n % 10];
+  $('#owl').classList.remove('talk'); void $('#owl').offsetWidth; $('#owl').classList.add('talk');
+  if (!await beat(on => { hl('#teFrames [data-part="t"]', on); hl('#teNum .d-t', on); }, 'ten', 1000)) return;
+  if (n === 10){ await beat(on => lit('full', on), 'Ten. A full box!', 1600); return; }
+  if (!await beat(on => { hl('#teFrames [data-part="o"]', on); hl('#teNum .d-o', on); }, n === 20 ? 'and ten' : `and ${o}`, 1200)) return;
+  if (f === 'easy'){
+    if (!await beat(on => lit('o', on), o, 850)) return;
+    if (!await beat(on => lit('t', on), 'teen', 850)) return;
+    if (!await beat(on => lit('full', on), numWord(n) + '!', 1400)) return;
+  } else if (f === 'hat'){
+    if (!await beat(on => lit('was', on), o, 900)) return;
+    if (!await beat(on => lit('o', on), `${o} wears a hat. ${HAT[n]}`, 2100)) return;
+    if (!await beat(on => lit('t', on), 'teen', 850)) return;
+    if (!await beat(on => lit('full', on), numWord(n) + '!', 1400)) return;
+  } else if (f === 'special'){
+    if (!await beat(on => lit('o', on), `ten and ${o}`, 1300)) return;
+    if (!await beat(on => lit('full', on), `has a special name. ${numWord(n)}!`, 2400)) return;
+  } else {
+    if (!await beat(on => lit('t', on), 'two tens', 1100)) return;
+    if (!await beat(on => lit('full', on), 'twenty!', 1300)) return;
+  }
+  if (S.teenID && my === run){ sayID(idWord(n)); await sleep(1500); }
+}
+$('#teSay').onclick = () => teSayIt(teN);
+$('#teBigWrap').onclick = () => say(numWord(teN));
+$('#tePrev').onclick = () => { stopAll(); const i = TEEN_ORDER.indexOf(teN); teShow(TEEN_ORDER[(i - 1 + TEEN_ORDER.length) % TEEN_ORDER.length]); };
+$('#teNext').onclick = () => { stopAll(); const i = TEEN_ORDER.indexOf(teN); teShow(TEEN_ORDER[(i + 1) % TEEN_ORDER.length]); };
+$('#teIDBtn').onclick = () => { S.teenID = !S.teenID; save(); teShow(teN, false); if (S.teenID) sayID(idWord(teN)); };
+// count 10 → 20, showing each number as it is said
+$('#teCount').onclick = async () => {
+  const my = ++run;
+  guide('Count with me: <b>10 to 20</b>!', false);
+  for (let n = 10; n <= 20; n++){
+    if (my !== run) return;
+    teShow(n, false); say(numWord(n));
+    await sleep(1150);
+  }
+  if (my === run) guide('Ten to twenty! Every teen is <b>ten and some more</b>.');
+};
+
+/* ---------- Which one? (show me fourteen) ---------- */
+const TEEN_BAG = {nums: [], last: 0};
+function teenNext(){
+  if (!TEEN_BAG.nums.length){
+    TEEN_BAG.nums = shuffle([11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+    if (TEEN_BAG.nums[TEEN_BAG.nums.length - 1] === TEEN_BAG.last) TEEN_BAG.nums.unshift(TEEN_BAG.nums.pop());
+  }
+  return TEEN_BAG.last = TEEN_BAG.nums.pop();
+}
+const cap = w => w.charAt(0).toUpperCase() + w.slice(1);
+const flipDigits = n => +String(n).split('').reverse().join('');
+let TL = null;
+function newTeenListen(){
+  stopAll(); setHint(null);
+  const n = teenNext();
+  TL = {n};
+  $('#teLWord').innerHTML = teenWordColored(n);
+  $('#teLResult').hidden = true; $('#teLNext').hidden = true; $('#teLAsk').hidden = false;
+  // the "written backwards" mistake (41 for fourteen) is one of the choices on purpose
+  const cands = n === 11 ? [10, 12] : n === 20 ? [12, 21] : [flipDigits(n), n < 19 ? n + 1 : n - 1];
+  makeChoices($('#teLChoices'), n, cands, () => {
+    stopAll();
+    const p = pick(PRAISE.teens); win('teens', p);
+    guide(p, `${p} ${cap(numWord(n))} is ${n === 20 ? 'two tens' : 'ten and ' + ONES[n - 10]}.`);
+    setTimeout(() => {
+      $('#teLAsk').hidden = true;
+      const r = $('#teLResult');
+      r.innerHTML = resHTML(`<span class="rnum">${teenDigits(n)}</span> is <b>${numWord(n)}</b>`, `<div class="tframes small">${teenFramesHTML(n)}</div><div class="ten-and">${teenAndHTML(n)}</div>`);
+      r.hidden = false; enter(r, 0);
+      const nx = $('#teLNext'); nx.hidden = false; setHint(() => nx);
+    }, 700);
+  }, m => {
+    if (m === flipDigits(n) && m > 20) guide(`That's <b>${numWord(m)}</b>. For <b>${numWord(n)}</b> we write the ten first: <span class="d-t">1</span><span class="d-o">${n % 10}</span>.`,
+      `That's ${numWord(m)}. For ${numWord(n)}, we write the one for ten first, then ${ONES[n % 10]}.`);
+    else guide(`That's <b>${numWord(m)}</b>. Listen again: <b>${numWord(n)}</b>.`, `That's ${numWord(m)}. Listen again. ${numWord(n)}.`);
+  });
+  guide(`Which one is <b>${numWord(n)}</b>?`, `Listen! ${numWord(n)}. Which number is ${numWord(n)}?`);
+}
+$('#teHear').onclick = () => TL && say(numWord(TL.n));
+$('#teLNext').onclick = newTeenListen;
+
+/* ---------- Build it: start with a full ten, add ones, counting on ---------- */
+let TB = null;
+function newTeenBuild(){
+  stopAll(); setHint(null);
+  const n = teenNext();
+  TB = {n, ones: 0, done: false, miss: false};
+  $('#teBWord').textContent = numWord(n);
+  $('#teBResult').hidden = true; $('#teBNext').hidden = true; $('#teBDone').hidden = false; $('#teBHelp').hidden = false;
+  const fr = $('#teBFrames');
+  fr.innerHTML = `<div class="tfw" data-part="t">${'<div class="frame">' + '<div class="cell"><i class="tdot t"></i></div>'.repeat(10) + '</div>'}<div class="tf-lab t">10 · ten</div></div>
+    <div class="tfw addable" data-part="o"><div class="frame" id="teBOnes">${'<div class="cell"></div>'.repeat(10)}</div><div class="tf-lab o" id="teBOLab">0 · ones</div></div>`;
+  $$('#teBOnes .cell').forEach((c, i) => c.onclick = () => {
+    if (!TB || TB.done) return;
+    if (i < TB.ones) teBRemove(); else teBAdd();
+  });
+  teBLive();
+  guide(`Make <b>${numWord(n)}</b>! We have ten. Tap to add more.`, `Let's make ${numWord(n)}. We already have ten. Tap the empty box to add more!`);
+  setHint(() => $$('#teBOnes .cell')[TB.ones], 3500);
+}
+function teBLive(){
+  const t = 10 + TB.ones;
+  $('#teBLive').innerHTML = `${teenDigits(t)}<small>${numWord(t)}</small>`;
+  const lab = $('#teBOLab'); lab.textContent = TB.ones === 10 ? '10 · ten' : `${TB.ones} · ${TB.ones ? ONES[TB.ones] : 'ones'}`;
+  lab.className = 'tf-lab ' + (TB.ones === 10 ? 't' : 'o');
+  $$('#teBOnes .cell').forEach((c, i) => c.classList.toggle('next', i === TB.ones));
+}
+function teBAdd(){
+  if (TB.ones >= 10) return;
+  const c = $$('#teBOnes .cell')[TB.ones];
+  c.innerHTML = '<i class="tdot o pop"></i>';
+  TB.ones++;
+  if (TB.ones === 10) $$('#teBOnes .tdot').forEach(d => d.className = 'tdot t pop');   // a second full box: two tens
+  sfx.pop(); say(numWord(10 + TB.ones));
+  teBLive();
+  setHint(() => $('#teBDone'), 3500);
+}
+function teBRemove(){
+  if (TB.ones <= 0) return;
+  if (TB.ones === 10) $$('#teBOnes .tdot').forEach(d => d.className = 'tdot o');
+  TB.ones--;
+  $$('#teBOnes .cell')[TB.ones].innerHTML = '';
+  sfx.whoosh(); say(numWord(10 + TB.ones));
+  teBLive();
+}
+$('#teBDone').onclick = () => {
+  if (!TB || TB.done) return;
+  const t = 10 + TB.ones, n = TB.n;
+  if (t === n){
+    TB.done = true; stopAll(); setHint(null);
+    const p = pick(PRAISE.teens); win('teens', p);
+    $('#teBDone').hidden = true; $('#teBHelp').hidden = true;
+    guide(p, `${p} ${n === 20 ? 'Two tens make twenty' : `Ten and ${ONES[n - 10]} make ${numWord(n)}`}!`);
+    setTimeout(() => {
+      const r = $('#teBResult');
+      r.innerHTML = resHTML(`${n === 20 ? '<span class="t">ten</span> and <span class="t">ten</span>' : `<b>ten</b> and <b>${ONES[n - 10]}</b>`} make <b>${numWord(n)}</b>`, '', `${n === 20 ? '10 + 10' : '10 + ' + (n - 10)} = ${n}`);
+      r.hidden = false; enter(r, 0);
+      const nx = $('#teBNext'); nx.hidden = false; setHint(() => nx);
+      nx.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    }, 700);
+  } else {
+    TB.miss = true; sfx.no();
+    const need = n === 20 ? 'two tens' : `ten and ${ONES[n - 10]}`;
+    if (t < n) guide(`This is <b>${numWord(t)}</b>. ${cap(numWord(n))} is <b>${need}</b>. Add more!`, `This is ${numWord(t)}. ${cap(numWord(n))} is ${need}. Add more!`);
+    else guide(`This is <b>${numWord(t)}</b>. Too many! Tap a dot to take one away.`, `This is ${numWord(t)}. Too many! Tap a dot to take one away.`);
+  }
+};
+// Help: count on from ten up to the target
+$('#teBHelp').onclick = async () => {
+  if (!TB || TB.done) return;
+  const my = ++run;
+  while (TB.ones > TB.n - 10){ if (my !== run) return; teBRemove(); await sleep(500); }
+  guide(`We have <b>ten</b>. Count on to <b>${numWord(TB.n)}</b>!`, `We have ten. Let's count on to ${numWord(TB.n)}!`);
+  await sleep(2200);
+  while (TB.ones < TB.n - 10){ if (my !== run) return; teBAdd(); await sleep(900); }
+  if (my === run) guide(`<b>${numWord(TB.n)}</b>! Now tap <b>✓ Done</b>.`);
+};
+$('#teBHear').onclick = () => TB && say(numWord(TB.n));
+$('#teBNext').onclick = newTeenBuild;
 
 /* ================= Start ================= */
 applyHome();
